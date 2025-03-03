@@ -24,14 +24,16 @@ const Header = () => {
 
       {/* Logged user details */}
       <div className="flex items-center gap-4">
-        <div>
+        <div className="bg-paleBlue-600 rounded-[15px] p-3 cursor-pointer">
           <CiBellOn className="text-paleBlue-100 text-2xl" />
         </div>
-        <div>
-          <FaRegUser className="text-paleBlue-100 text-2xl" />
-          <div>
-            <h1>Taylor Swift</h1>
-            <p>Admin</p>
+        <div className="flex items-center gap-3 cursor-pointer">
+          <FaRegUser className="text-paleBlue-100 text-4xl" />
+          <div className="flex flex-col items-start">
+            <h1 className="text-md text-paleBlue-100 font-semibold">
+              Taylor Swift
+            </h1>
+            <p className="text-xs text-paleBlue-300">Admin</p>
           </div>
         </div>
       </div>
