@@ -45,8 +45,10 @@ const Greetings = () => {
         </p>
       </div>
       <div>
-        <h1>time</h1>
-        <p>date</p>
+        <h1 className="text-paleBlue-100 text-3xl font-bold tracking-wide w-[130px]">
+          {formatTime(dateTime)}
+        </h1>
+        <p className="text-paleBlue-200 text-sm">{formatDate(dateTime)}</p>
       </div>
     </div>
   );
