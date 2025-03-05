@@ -3,6 +3,8 @@ import BottomNav from "../components/shared/BottomNav";
 import Greetings from "../components/home/Greetings";
 import { FaCashRegister } from "react-icons/fa";
 import { RiProgress1Line } from "react-icons/ri";
+import MiniCard from "../components/home/MiniCard";
+import RecentOrders from "../components/home/RecentOrders";
 
 const Home = () => {
   return (
@@ -24,6 +26,7 @@ const Home = () => {
             footerNum={3.6}
           />
         </div>
+        <RecentOrders />
       </div>
 
       {/* Right div */}
