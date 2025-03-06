@@ -1,5 +1,6 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import OrderList from "./OrderList";
 
 const RecentOrders = () => {
   return (
@@ -19,6 +20,11 @@ const RecentOrders = () => {
             placeholder="Search resent orders"
             className="bg-paleBlue-900 text-paleBlue-100  outline-none"
           />
+        </div>
+
+        {/* Order list */}
+        <div className="mt-4 px-6">
+          <OrderList />
         </div>
       </div>
     </div>
