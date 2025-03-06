@@ -30,7 +30,7 @@ const Home = () => {
       </div>
 
       {/* Right div */}
-      <div className="flex-[7] bg-paleBlue-700"></div>
+      <div className="flex-[2] bg-paleBlue-700"></div>
 
       <BottomNav />
     </section>
