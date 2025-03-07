@@ -9,7 +9,7 @@ const MiniCard = ({ title, icon, number, footerNum }) => {
         </h1>
         <button
           className={`${
-            title === "Total Earnings" ? "bg-[#9ea4cc]" : "bg-[#070121]"
+            title === "Total Earnings" ? "bg-[#9ea4cc]" : "bg-[#74bebb]"
           } p-3 rounded-lg text-paleBlue-100 text-2xl`}
         >
           {icon}
