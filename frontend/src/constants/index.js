@@ -1,0 +1,130 @@
+import sushi from "../assets/images/sushi.jpeg";
+import ramen from "../assets/images/ramen.jpg";
+import tacos from "../assets/images/972.jpg";
+import pho from "../assets/images/JB_Recipes_Pho_1.jpg";
+import burger from "../assets/images/chile-smash-burgers.jpg";
+import pizza from "../assets/images/Margherita-pizza.jpg";
+import pasta from "../assets/images/spaghetti-carbonara.jpeg";
+import paella from "../assets/images/paella-mixta-439452.webp";
+import croissant from "../assets/images/croissant.webp";
+import steak from "../assets/images/Grilled-Steak.jpg";
+
+export const popularDishes = [
+  {
+    id: 1,
+    image: sushi,
+    name: "Sushi",
+    numberOfOrders: 280,
+  },
+  {
+    id: 2,
+    image: ramen,
+    name: "Ramen",
+    numberOfOrders: 230,
+  },
+  {
+    id: 3,
+    image: tacos,
+    name: "Tacos",
+    numberOfOrders: 320,
+  },
+  {
+    id: 4,
+    image: pho,
+    name: "Pho",
+    numberOfOrders: 190,
+  },
+  {
+    id: 5,
+    image: burger,
+    name: "Cheeseburger",
+    numberOfOrders: 260,
+  },
+  {
+    id: 6,
+    image: pizza,
+    name: "Margherita Pizza",
+    numberOfOrders: 340,
+  },
+  {
+    id: 7,
+    image: pasta,
+    name: "Pasta Carbonara",
+    numberOfOrders: 220,
+  },
+  {
+    id: 8,
+    image: paella,
+    name: "Paella",
+    numberOfOrders: 180,
+  },
+  {
+    id: 9,
+    image: croissant,
+    name: "Croissant",
+    numberOfOrders: 150,
+  },
+  {
+    id: 10,
+    image: steak,
+    name: "Grilled Steak",
+    numberOfOrders: 200,
+  },
+];
+
+export const tables = [
+  { id: 1, name: "Table A", status: "Available", initial: "KM", seats: 4 },
+  { id: 2, name: "Table B", status: "Booked", initial: "LP", seats: 6 },
+  { id: 3, name: "Table C", status: "Available", initial: "DS", seats: 2 },
+  { id: 4, name: "Table D", status: "Booked", initial: "JR", seats: 4 },
+  { id: 5, name: "Table E", status: "Available", initial: "MV", seats: 3 },
+  { id: 6, name: "Table F", status: "Booked", initial: "WT", seats: 4 },
+  { id: 7, name: "Table G", status: "Available", initial: "OS", seats: 5 },
+  { id: 8, name: "Table H", status: "Booked", initial: "RA", seats: 5 },
+  { id: 9, name: "Table I", status: "Available", initial: "NL", seats: 6 },
+  { id: 10, name: "Table J", status: "Booked", initial: "CB", seats: 6 },
+  { id: 11, name: "Table K", status: "Available", initial: "FH", seats: 4 },
+  { id: 12, name: "Table L", status: "Booked", initial: "ZX", seats: 6 },
+  { id: 13, name: "Table M", status: "Available", initial: "YU", seats: 2 },
+  { id: 14, name: "Table N", status: "Booked", initial: "PK", seats: 6 },
+  { id: 15, name: "Table O", status: "Available", initial: "TV", seats: 3 },
+];
+
+export const startersItem = [
+  {
+    id: 1,
+    name: "Bruschetta",
+    price: 180,
+    category: "Vegetarian",
+  },
+  {
+    id: 2,
+    name: "Garlic Prawns",
+    price: 320,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 3,
+    name: "BBQ Chicken Wings",
+    price: 290,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 4,
+    name: "Stuffed Mushrooms",
+    price: 200,
+    category: "Vegetarian",
+  },
+  {
+    id: 5,
+    name: "Mozzarella Sticks",
+    price: 230,
+    category: "Vegetarian",
+  },
+  {
+    id: 6,
+    name: "Lamb Seekh Kebab",
+    price: 350,
+    category: "Non-Vegetarian",
+  },
+];
