@@ -5,6 +5,7 @@ import { FaCashRegister } from "react-icons/fa";
 import { RiProgress1Line } from "react-icons/ri";
 import MiniCard from "../components/home/MiniCard";
 import RecentOrders from "../components/home/RecentOrders";
+import PopularDishes from "../components/home/PopularDishes";
 
 const Home = () => {
   return (
@@ -30,7 +31,9 @@ const Home = () => {
       </div>
 
       {/* Right div */}
-      <div className="flex-[2] bg-paleBlue-700"></div>
+      <div className="flex-[2] bg-paleBlue-700">
+        <PopularDishes />
+      </div>
 
       <BottomNav />
     </section>
