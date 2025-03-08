@@ -128,3 +128,120 @@ export const startersItem = [
     category: "Non-Vegetarian",
   },
 ];
+
+export const mainCourse = [
+  {
+    id: 1,
+    name: "Grilled Salmon",
+    price: 550,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 2,
+    name: "Vegetable Lasagna",
+    price: 400,
+    category: "Vegetarian",
+  },
+  {
+    id: 3,
+    name: "Beef Stroganoff",
+    price: 600,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 4,
+    name: "Mushroom Risotto",
+    price: 350,
+    category: "Vegetarian",
+  },
+  {
+    id: 5,
+    name: "Chicken Alfredo Pasta",
+    price: 450,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 6,
+    name: "Stuffed Bell Peppers",
+    price: 320,
+    category: "Vegetarian",
+  },
+];
+
+export const beverages = [
+  {
+    id: 1,
+    name: "Espresso",
+    price: 90,
+    category: "Hot",
+  },
+  {
+    id: 2,
+    name: "Cappuccino",
+    price: 140,
+    category: "Hot",
+  },
+  {
+    id: 3,
+    name: "Strawberry Smoothie",
+    price: 180,
+    category: "Cold",
+  },
+  {
+    id: 4,
+    name: "Blue Lagoon Mocktail",
+    price: 200,
+    category: "Cold",
+  },
+  {
+    id: 5,
+    name: "Hot Chocolate",
+    price: 130,
+    category: "Hot",
+  },
+  {
+    id: 6,
+    name: "Virgin Mojito",
+    price: 160,
+    category: "Cold",
+  },
+];
+
+export const soups = [
+  {
+    id: 1,
+    name: "Minestrone Soup",
+    price: 140,
+    category: "Vegetarian",
+  },
+  {
+    id: 2,
+    name: "French Onion Soup",
+    price: 150,
+    category: "Vegetarian",
+  },
+  {
+    id: 3,
+    name: "Pumpkin Soup",
+    price: 130,
+    category: "Vegetarian",
+  },
+  {
+    id: 4,
+    name: "Seafood Chowder",
+    price: 180,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 5,
+    name: "Beef Goulash Soup",
+    price: 190,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 6,
+    name: "Thai Tom Yum Soup",
+    price: 170,
+    category: "Non-Vegetarian",
+  },
+];
