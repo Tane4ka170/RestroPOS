@@ -21,8 +21,8 @@ const OrderList = () => {
           </h1>
         </div>
 
-        <div className="items-start flex flex-col gap-2">
-          <p className="text-green-600 px-4">
+        <div className="items-end flex flex-col gap-2">
+          <p className="text-green-600">
             {" "}
             <FaCheck className="mr-2 inline" />
             Ready
