@@ -35,6 +35,10 @@ const OrderCard = () => {
         <p>8 items</p>
       </div>
       <hr className="w-full text-paleBlue-100 mt-4 border-t-1 border-royalBlue-500" />
+      <div className="flex items-center justify-between mt-4">
+        <h1>Total</h1>
+        <p className="text-paleBlue-100 text-lg font-semibold">$ 250.00</p>
+      </div>
     </div>
   );
 };
