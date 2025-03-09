@@ -17,8 +17,8 @@ const OrderCard = () => {
             <p className="text-paleBlue-200 text-sm">#101/Dine in</p>
           </div>
 
-          <div className="items-start flex flex-col gap-2">
-            <p className="text-green-600 px-4">
+          <div className="items-end flex flex-col gap-2">
+            <p className="text-green-600 px-2 bg-green-300 rounded-lg py-1">
               {" "}
               <FaCheck className="mr-2 inline" />
               Ready
@@ -36,7 +36,7 @@ const OrderCard = () => {
       </div>
       <hr className="w-full text-paleBlue-100 mt-4 border-t-1 border-royalBlue-500" />
       <div className="flex items-center justify-between mt-4">
-        <h1>Total</h1>
+        <h1 className="text-paleBlue-100 text-lg font-semibold">Total</h1>
         <p className="text-paleBlue-100 text-lg font-semibold">$ 250.00</p>
       </div>
     </div>
