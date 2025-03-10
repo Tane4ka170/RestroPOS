@@ -6,7 +6,7 @@ const BackButton = () => {
   const navigate = useNavigate();
   return (
     <button
-      className="text-[#74bebb] p-3 text-xl font-bold rounded-lg"
+      className="bg-[#74bebb] p-3 text-xl font-bold rounded-full text-paleBlue-100"
       onClick={() => navigate(-1)}
     >
       <IoIosArrowRoundBack />
