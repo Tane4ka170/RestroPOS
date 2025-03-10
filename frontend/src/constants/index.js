@@ -377,3 +377,93 @@ export const salads = [
     category: "Non-Vegetarian",
   },
 ];
+
+export const menus = [
+  {
+    id: 1,
+    name: "Appetizers",
+    bgColor: "#2904df",
+    icon: "🥟",
+    items: startersItem,
+  },
+  {
+    id: 2,
+    name: "Grill Specials",
+    bgColor: "#e21406",
+    icon: "🥩",
+    items: mainCourse,
+  },
+  {
+    id: 3,
+    name: "Soft Drinks",
+    bgColor: "#7810a8",
+    icon: "🥤",
+    items: beverages,
+  },
+  {
+    id: 4,
+    name: "Broths & Soups",
+    bgColor: "#3bc141",
+    icon: "🍲",
+    items: soups,
+  },
+  {
+    id: 5,
+    name: "Sweet Treats",
+    bgColor: "#c776a6",
+    icon: "🍩",
+    items: desserts,
+  },
+  {
+    id: 6,
+    name: "Italian Pizzas",
+    bgColor: "#ba7487",
+    icon: "🍕",
+    items: pizzas,
+  },
+  {
+    id: 7,
+    name: "Spirits & Cocktails",
+    bgColor: "#381c34",
+    icon: "🍷",
+    items: alcoholicDrinks,
+  },
+  {
+    id: 8,
+    name: "Fresh Greens",
+    bgColor: "#6a4c41",
+    icon: "🥗",
+    items: salads,
+  },
+];
+
+export const metricsData = [
+  {
+    title: "Total Sales",
+    value: "₹75,320.50",
+    percentage: "8%",
+    color: "#c447d6",
+    isIncrease: true,
+  },
+  {
+    title: "New Customers",
+    value: "12,540",
+    percentage: "14%",
+    color: "#fedbbd",
+    isIncrease: true,
+  },
+  {
+    title: "Website Visits",
+    value: "32,890",
+    percentage: "6%",
+    color: "#380087",
+    isIncrease: false,
+  },
+  {
+    title: "Orders Processed",
+    value: "15,430",
+    percentage: "12%",
+    color: "#8b6f76",
+    isIncrease: true,
+  },
+];
