@@ -467,3 +467,67 @@ export const metricsData = [
     isIncrease: true,
   },
 ];
+
+export const itemsData = [
+  {
+    title: "Total Menu Sections",
+    value: "10",
+    percentage: "15%",
+    color: "#e6f993",
+    isIncrease: true,
+  },
+  {
+    title: "Total Food Items",
+    value: "65",
+    percentage: "10%",
+    color: "#6a7f85",
+    isIncrease: true,
+  },
+  {
+    title: "Pending Orders",
+    value: "8",
+    percentage: "7%",
+    color: "#8d2ef9",
+    isIncrease: false,
+  },
+  { title: "Reserved Tables", value: "14", color: "#749f0c" },
+];
+
+export const orders = [
+  {
+    id: "201",
+    customer: "Sophia Williams",
+    status: "Completed",
+    dateTime: "March 7, 2025 07:45 PM",
+    items: 4,
+    tableNo: 2,
+    total: 320.0,
+  },
+  {
+    id: "202",
+    customer: "Liam Johnson",
+    status: "In Progress",
+    dateTime: "March 7, 2025 08:10 PM",
+    items: 7,
+    tableNo: 1,
+    total: 450.0,
+  },
+  {
+    id: "203",
+    customer: "Olivia Martinez",
+    status: "Pending",
+    dateTime: "March 7, 2025 08:30 PM",
+    items: 5,
+    tableNo: 3,
+    total: 275.0,
+  },
+  {
+    id: "204",
+    customer: "Ethan Davis",
+    status: "Ready",
+    dateTime: "March 7, 2025 08:50 PM",
+    items: 6,
+    tableNo: 4,
+    total: 390.0,
+  },
+];
