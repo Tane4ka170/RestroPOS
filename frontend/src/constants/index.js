@@ -245,3 +245,135 @@ export const soups = [
     category: "Non-Vegetarian",
   },
 ];
+
+export const desserts = [
+  {
+    id: 1,
+    name: "Tiramisu",
+    price: 200,
+    category: "Vegetarian",
+  },
+  {
+    id: 2,
+    name: "Cheesecake",
+    price: 220,
+    category: "Vegetarian",
+  },
+  {
+    id: 3,
+    name: "Apple Pie",
+    price: 180,
+    category: "Vegetarian",
+  },
+  {
+    id: 4,
+    name: "Mango Mousse",
+    price: 190,
+    category: "Vegetarian",
+  },
+];
+
+export const pizzas = [
+  {
+    id: 1,
+    name: "BBQ Chicken Pizza",
+    price: 480,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 2,
+    name: "Four Cheese Pizza",
+    price: 420,
+    category: "Vegetarian",
+  },
+  {
+    id: 3,
+    name: "Hawaiian Pizza",
+    price: 450,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 4,
+    name: "Mushroom Truffle Pizza",
+    price: 500,
+    category: "Vegetarian",
+  },
+];
+
+export const alcoholicDrinks = [
+  {
+    id: 1,
+    name: "Red Wine",
+    price: 550,
+    category: "Alcoholic",
+  },
+  {
+    id: 2,
+    name: "White Wine",
+    price: 530,
+    category: "Alcoholic",
+  },
+  {
+    id: 3,
+    name: "Gin & Tonic",
+    price: 450,
+    category: "Alcoholic",
+  },
+  {
+    id: 4,
+    name: "Margarita",
+    price: 480,
+    category: "Alcoholic",
+  },
+  {
+    id: 5,
+    name: "Old Fashioned",
+    price: 520,
+    category: "Alcoholic",
+  },
+  {
+    id: 6,
+    name: "Mojito",
+    price: 420,
+    category: "Alcoholic",
+  },
+];
+
+export const salads = [
+  {
+    id: 1,
+    name: "Avocado Salad",
+    price: 220,
+    category: "Vegetarian",
+  },
+  {
+    id: 2,
+    name: "Caprese Salad",
+    price: 260,
+    category: "Vegetarian",
+  },
+  {
+    id: 3,
+    name: "Quinoa & Veggie Salad",
+    price: 280,
+    category: "Vegetarian",
+  },
+  {
+    id: 4,
+    name: "Shrimp Caesar Salad",
+    price: 350,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 5,
+    name: "Grilled Chicken Salad",
+    price: 320,
+    category: "Non-Vegetarian",
+  },
+  {
+    id: 6,
+    name: "Smoked Salmon Salad",
+    price: 400,
+    category: "Non-Vegetarian",
+  },
+];
