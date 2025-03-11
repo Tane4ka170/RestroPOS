@@ -35,7 +35,7 @@ const Tables = () => {
           </button>
         </div>
 
-        <div className="px-16 py-4 ">
+        <div className="grid grid-cols-3 gap-3 px-14 py-4 overflow-y-scroll scrollbar-hide">
           <TableCard />
         </div>
       </div>
