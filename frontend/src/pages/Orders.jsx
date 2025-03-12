@@ -51,8 +51,10 @@ const Orders = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 px-16 py-4 overflow-y-scroll scrollbar-hide">
-        <OrderCard />
+      <div className="flex-1 overflow-y-scroll h-[650px] px-10 py-4 scrollbar-hide">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <OrderCard />
+        </div>
       </div>
 
       <BottomNav />
