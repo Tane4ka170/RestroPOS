@@ -3,21 +3,21 @@ import { FaCheck, FaCircle } from "react-icons/fa";
 
 const OrderCard = () => {
   return (
-    <div className="w-[500px] bg-paleBlue-600 p-4 rounded-lg mb-4">
+    <div className="w-full max-w-[400px] bg-paleBlue-600 p-4 rounded-lg mb-4">
       <div className="flex items-center gap-5">
-        <button className="bg-[#74bebb] p-4 text-xl font-bold rounded-lg text-paleBlue-100">
+        <button className="bg-aquaTeal-500  p-3 text-xl font-bold rounded-lg">
           TS
         </button>
 
         <div className="flex items-center justify-between w-[100%]">
-          <div className="items-start flex flex-col gap-1">
+          <div className="flex flex-col items-start gap-1">
             <h1 className="text-paleBlue-100 text-lg font-semibold tracking-wide">
               Taylor Swift
             </h1>
             <p className="text-paleBlue-200 text-sm">#101/Dine in</p>
           </div>
 
-          <div className="items-end flex flex-col gap-2">
+          <div className="flex flex-col items-end gap-2">
             <p className="text-green-600 px-2 bg-green-300 rounded-lg py-1">
               {" "}
               <FaCheck className="mr-2 inline" />
