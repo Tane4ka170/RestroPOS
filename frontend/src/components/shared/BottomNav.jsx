@@ -22,19 +22,17 @@ const BottomNav = () => {
       >
         <GoListOrdered className="inline mr-2" size={20} /> <p>Orders</p>
       </button>
-      <button className="text-paleBlue-200 bg-paleBlue-800 w-[200px] rounded-[20px] items-center flex justify-center">
-        <MdOutlineTableBar
-          className="inline mr-2"
-          size={20}
-          onClick={() => navigate("/tables")}
-        />{" "}
-        <p>Tables</p>
+      <button
+        className="text-paleBlue-200 bg-paleBlue-800 w-[200px] rounded-[20px] items-center flex justify-center"
+        onClick={() => navigate("/tables")}
+      >
+        <MdOutlineTableBar className="inline mr-2" size={20} /> <p>Tables</p>
       </button>
       <button className="text-paleBlue-200 bg-paleBlue-800 w-[200px] rounded-[20px] items-center flex justify-center">
         <CiCircleMore className="inline mr-2" size={20} /> <p>More</p>
       </button>
 
-      <button className="bg-[#74bebb] rounded-full text-paleBlue-100 p-3 absolute bottom-4">
+      <button className="bg-aquaTeal-500 rounded-full text-paleBlue-100 p-3 absolute bottom-4">
         <BiDish size={30} />
       </button>
     </div>
