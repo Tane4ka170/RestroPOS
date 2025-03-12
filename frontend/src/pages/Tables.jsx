@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BottomNav from "../components/shared/BottomNav";
 import BackButton from "../components/shared/BackButton";
 import TableCard from "../components/tables/TableCard";
+import { tables } from "../constants";
 
 const Tables = () => {
   const [status, setStatus] = useState("all");
@@ -34,9 +35,19 @@ const Tables = () => {
             Booked
           </button>
         </div>
+      </div>
 
-        <div className="grid grid-cols-3 gap-3 px-14 py-4 overflow-y-scroll scrollbar-hide">
-          <TableCard />
+      {/* Контейнер зі столиками */}
+      <div className="flex-1 overflow-y-scroll h-[650px] px-10 py-4 scrollbar-hide">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tables.map((table) => (
+            <TableCard
+              key={table.id}
+              name={table.name}
+              status={table.status}
+              initials={table.initial}
+            />
+          ))}
         </div>
       </div>
       <BottomNav />
