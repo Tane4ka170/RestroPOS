@@ -8,7 +8,7 @@ const Tables = () => {
   const [status, setStatus] = useState("all");
 
   return (
-    <section className="bg-paleBlue-400 h-[calc(100vh-5rem)] overflow-hidden">
+    <section className="bg-paleBlue-400 h-[calc(100vh-5rem)] overflow-hidden flex flex-col">
       <div className="flex items-center justify-between px-10 py-4">
         <div className="flex items-center gap-4">
           <BackButton />
@@ -37,8 +37,7 @@ const Tables = () => {
         </div>
       </div>
 
-      {/* Контейнер зі столиками */}
-      <div className="flex-1 overflow-y-scroll h-[650px] px-10 py-4 scrollbar-hide">
+      <div className="flex-1 overflow-y-auto px-10 py-4 pb-20 scrollbar-hide">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tables.map((table) => (
             <TableCard
@@ -50,6 +49,7 @@ const Tables = () => {
           ))}
         </div>
       </div>
+
       <BottomNav />
     </section>
   );
