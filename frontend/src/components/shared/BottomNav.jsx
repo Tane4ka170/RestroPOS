@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiCircleMore, CiHome } from "react-icons/ci";
 import { GoListOrdered } from "react-icons/go";
 import { MdOutlineTableBar } from "react-icons/md";
 import { BiDish } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import Modal from "./Modal";
 
 const BottomNav = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-paleBlue-800 p-2 flex justify-around">
@@ -32,9 +37,14 @@ const BottomNav = () => {
         <CiCircleMore className="inline mr-2" size={20} /> <p>More</p>
       </button>
 
-      <button className="bg-aquaTeal-500 rounded-full text-paleBlue-100 p-3 absolute bottom-4">
+      <button
+        className="bg-aquaTeal-500 rounded-full text-paleBlue-100 p-3 absolute bottom-4"
+        onClick={openModal}
+      >
         <BiDish size={30} />
       </button>
+
+      <Modal></Modal>
     </div>
   );
 };
