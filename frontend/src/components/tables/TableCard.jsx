@@ -1,9 +1,10 @@
 import React from "react";
+import { getRandomBg } from "../../utils";
 
 const TableCard = ({ key, name, status, initials }) => {
   return (
     <div
-      className="w-[300px] bg-paleBlue-600 p-4 rounded-lg cursor-pointer"
+      className="w-[300px] bg-paleBlue-600 p-4 rounded-lg cursor-pointer hover:bg-paleBlue-700"
       key={key}
     >
       <div className="flex items-center justify-between px-1">
@@ -18,9 +19,9 @@ const TableCard = ({ key, name, status, initials }) => {
           {status}
         </p>
       </div>
-      <div className="flex items-center justify-between mt-5 mb-7">
+      <div className="flex items-center justify-between mt-5 mb-9">
         <h1
-          className={`bg-aquaTeal-500 text-paleBlue-100 rounded-full p-4 text-xl`}
+          className={`${getRandomBg()} text-paleBlue-100 rounded-full p-4 text-xl`}
         >
           {initials}
         </h1>
