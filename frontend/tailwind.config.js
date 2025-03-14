@@ -49,6 +49,7 @@ export default {
         800: "#2e4c4b",
         900: "#172625",
       },
+      transparent: "transparent",
     },
   },
   plugins: [scrollbarHide],
