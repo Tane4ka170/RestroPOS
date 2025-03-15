@@ -1,11 +1,19 @@
 import React from "react";
 import { getRandomBg } from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 const TableCard = ({ key, name, status, initials }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (status === "Booked") return;
+    navigate("/menu");
+  };
   return (
     <div
       className="w-[300px] bg-paleBlue-600 p-4 rounded-lg cursor-pointer hover:bg-paleBlue-700"
       key={key}
+      onClick={handleClick}
     >
       <div className="flex items-center justify-between px-1">
         <h1 className="text-paleBlue-100 text-xl font-semibold">{name}</h1>
