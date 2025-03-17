@@ -4,6 +4,16 @@ import { menus } from "../../constants";
 
 const MenuContainer = () => {
   const [selected, setSelected] = useState(menus[0]);
+  const [itemCount, setItemCount] = useState(0);
+
+  const increment = () => {
+    if (itemCount >= 6) return;
+    setItemCount((prev) => prev + 1);
+  };
+  const decrement = () => {
+    if (itemCount <= 0) return;
+    setItemCount((prev) => prev - 1);
+  };
   return (
     <>
       <div className="grid grid-cols-4 gap-4 px-10 py-4 w-[100%]">
@@ -40,15 +50,29 @@ const MenuContainer = () => {
               key={menu.id}
               className="flex flex-col items-start justify-between p-4 rounded-lg h-[100px] cursor-pointer hover:bg-paleBlue-500 bg-paleBlue-900"
             >
+              <h1 className="text-paleBlue-100 text-lg font-semibold">
+                {menu.name}
+              </h1>
               <div className="flex items-center justify-between w-full">
-                <h1 className="text-paleBlue-100 text-lg font-semibold">
-                  {menu.icon} {menu.name}
-                </h1>
+                <p className="text-paleBlue-100 text-xl font-bold">
+                  $ {menu.price}
+                </p>
+                <div className="flex items-center justify-between bg-paleBlue-700 px-2 py-1 rounded-lg gap-6">
+                  <button
+                    className="text-aquaTeal-500 text-2xl"
+                    onClick={decrement}
+                  >
+                    &minus;
+                  </button>
+                  <span className="text-paleBlue-100">0</span>
+                  <button
+                    className="text-aquaTeal-500 text-2xl"
+                    onClick={increment}
+                  >
+                    &#43;
+                  </button>
+                </div>
               </div>
-              <p className="text-paleBlue-200 text-sm font-semibold">
-                {" "}
-                ${menu.price}
-              </p>
             </div>
           );
         })}
