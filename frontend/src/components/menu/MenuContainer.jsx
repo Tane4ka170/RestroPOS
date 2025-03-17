@@ -31,7 +31,28 @@ const MenuContainer = () => {
         })}
       </div>
 
-      <hr />
+      <hr className="border-paleBlue-400 border-t-2 mt-4" />
+
+      <div className="grid grid-cols-4 gap-4 px-10 py-4 w-[100%]">
+        {selected?.items.map((menu) => {
+          return (
+            <div
+              key={menu.id}
+              className="flex flex-col items-start justify-between p-4 rounded-lg h-[100px] cursor-pointer hover:bg-paleBlue-500 bg-paleBlue-900"
+            >
+              <div className="flex items-center justify-between w-full">
+                <h1 className="text-paleBlue-100 text-lg font-semibold">
+                  {menu.icon} {menu.name}
+                </h1>
+              </div>
+              <p className="text-paleBlue-200 text-sm font-semibold">
+                {" "}
+                ${menu.price}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };
