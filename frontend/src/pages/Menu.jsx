@@ -3,6 +3,8 @@ import BottomNav from "../components/shared/BottomNav";
 import BackButton from "../components/shared/BackButton";
 import { IoIosRestaurant } from "react-icons/io";
 import MenuContainer from "../components/menu/MenuContainer";
+import CustomerInfo from "../components/menu/CustomerInfo";
+import CartInfo from "../components/menu/CartInfo";
 
 const Menu = () => {
   return (
@@ -34,29 +36,10 @@ const Menu = () => {
       {/* Right div */}
       <div className="flex-[1] bg-paleBlue-700 mr-4 mt-3 h-[780px] rounded-lg pt-2">
         {/* Customer info */}
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="flex flex-col items-start">
-            <h1 className="text-md text-paleBlue-100 font-semibold tracking-wide">
-              Customer Name
-            </h1>
-            <p className="text-xs text-paleBlue-200 font-medium mt-1">
-              #101/Dine In
-            </p>
-            <p className="text-xs text-paleBlue-200 font-medium mt-2">
-              March 18, 2025 20:11
-            </p>
-          </div>
-          <button className="bg-aquaTeal-500 p-3 text-xl font-bold rounded-lg">
-            TS
-          </button>
-        </div>
+        <CustomerInfo />
         <hr className="border-paleBlue-900 border-t-2" />
         {/* Cart Items */}
-        <div className="px-4 py-2">
-          <h1 className="text-lg text-royalBlue-100 font-semibold tracking-wide">
-            Order Details
-          </h1>
-        </div>
+        <CartInfo />
         {/* Bills */}
       </div>
 
