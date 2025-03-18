@@ -5,12 +5,15 @@ import { menus } from "../../constants";
 const MenuContainer = () => {
   const [selected, setSelected] = useState(menus[0]);
   const [itemCount, setItemCount] = useState(0);
+  const [itemId, setItemId] = useState();
 
-  const increment = () => {
-    if (itemCount >= 6) return;
+  const increment = (id) => {
+    setItemId(id);
+    if (itemCount >= 4) return;
     setItemCount((prev) => prev + 1);
   };
-  const decrement = () => {
+  const decrement = (id) => {
+    setItemId(id);
     if (itemCount <= 0) return;
     setItemCount((prev) => prev - 1);
   };
@@ -23,7 +26,11 @@ const MenuContainer = () => {
               key={menu.id}
               className="flex flex-col items-start justify-between p-4 rounded-lg h-[100px] cursor-pointer"
               style={{ backgroundColor: menu.bgColor }}
-              onClick={() => setSelected(menu)}
+              onClick={() => {
+                setSelected(menu);
+                setItemId(0);
+                setItemCount(0);
+              }}
             >
               <div className="flex items-center justify-between w-full">
                 <h1 className="text-paleBlue-100 text-lg font-semibold">
@@ -60,14 +67,16 @@ const MenuContainer = () => {
                 <div className="flex items-center justify-between bg-paleBlue-700 px-2 py-1 rounded-lg gap-6">
                   <button
                     className="text-aquaTeal-500 text-2xl"
-                    onClick={decrement}
+                    onClick={() => decrement(menu.id)}
                   >
                     &minus;
                   </button>
-                  <span className="text-paleBlue-100">0</span>
+                  <span className="text-paleBlue-100">
+                    {menu.id === itemId ? itemCount : "0"}
+                  </span>
                   <button
                     className="text-aquaTeal-500 text-2xl"
-                    onClick={increment}
+                    onClick={() => increment(menu.id)}
                   >
                     &#43;
                   </button>
