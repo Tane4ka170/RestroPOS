@@ -39,9 +39,24 @@ const Menu = () => {
             <h1 className="text-md text-paleBlue-100 font-semibold tracking-wide">
               Customer Name
             </h1>
+            <p className="text-xs text-paleBlue-200 font-medium mt-1">
+              #101/Dine In
+            </p>
+            <p className="text-xs text-paleBlue-200 font-medium mt-2">
+              March 18, 2025 20:11
+            </p>
           </div>
+          <button className="bg-aquaTeal-500 p-3 text-xl font-bold rounded-lg">
+            TS
+          </button>
         </div>
+        <hr className="border-paleBlue-900 border-t-2" />
         {/* Cart Items */}
+        <div className="px-4 py-2">
+          <h1 className="text-lg text-royalBlue-100 font-semibold tracking-wide">
+            Order Details
+          </h1>
+        </div>
         {/* Bills */}
       </div>
 
