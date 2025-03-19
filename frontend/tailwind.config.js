@@ -3,7 +3,11 @@ import scrollbarHide from "tailwind-scrollbar-hide";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        md: "1.0625rem",
+      },
+    },
     colors: {
       paleBlue: {
         100: "#efeffa",
