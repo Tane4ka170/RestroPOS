@@ -5,6 +5,7 @@ import { IoIosRestaurant } from "react-icons/io";
 import MenuContainer from "../components/menu/MenuContainer";
 import CustomerInfo from "../components/menu/CustomerInfo";
 import CartInfo from "../components/menu/CartInfo";
+import BillsInfo from "../components/menu/BillsInfo";
 
 const Menu = () => {
   return (
@@ -34,13 +35,15 @@ const Menu = () => {
       </div>
 
       {/* Right div */}
-      <div className="flex-[1] bg-paleBlue-700 mr-4 mt-3 h-[780px] rounded-lg pt-2">
+      <div className="flex-[1] bg-paleBlue-700 mr-4 mt-3 h-[780px] rounded-lg pt-2 ">
         {/* Customer info */}
         <CustomerInfo />
         <hr className="border-paleBlue-900 border-t-2" />
         {/* Cart Items */}
         <CartInfo />
+        <hr className="border-paleBlue-900 border-t-2" />
         {/* Bills */}
+        <BillsInfo />
       </div>
 
       <BottomNav />
