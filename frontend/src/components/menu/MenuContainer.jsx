@@ -58,12 +58,12 @@ const MenuContainer = () => {
               key={menu.id}
               className="flex flex-col items-start justify-between p-4 rounded-lg h-[100px] cursor-pointer hover:bg-paleBlue-500 bg-paleBlue-900"
             >
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between w-full">
                 <h1 className="text-paleBlue-100 text-lg font-semibold">
                   {menu.name}
                 </h1>
-                <button>
-                  <FaShoppingCart />
+                <button className="bg-green-300 text-green-600 p-2 rounded-lg">
+                  <FaShoppingCart className="" size={20} />
                 </button>
               </div>
               <div className="flex items-center justify-between w-full">
