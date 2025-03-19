@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { GrRadialSelected } from "react-icons/gr";
 import { menus } from "../../constants";
+import { FaShoppingCart } from "react-icons/fa";
 
 const MenuContainer = () => {
   const [selected, setSelected] = useState(menus[0]);
@@ -57,9 +58,14 @@ const MenuContainer = () => {
               key={menu.id}
               className="flex flex-col items-start justify-between p-4 rounded-lg h-[100px] cursor-pointer hover:bg-paleBlue-500 bg-paleBlue-900"
             >
-              <h1 className="text-paleBlue-100 text-lg font-semibold">
-                {menu.name}
-              </h1>
+              <div className="flex items-start justify-between">
+                <h1 className="text-paleBlue-100 text-lg font-semibold">
+                  {menu.name}
+                </h1>
+                <button>
+                  <FaShoppingCart />
+                </button>
+              </div>
               <div className="flex items-center justify-between w-full">
                 <p className="text-paleBlue-100 text-xl font-bold">
                   $ {menu.price}
