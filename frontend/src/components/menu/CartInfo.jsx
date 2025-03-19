@@ -30,6 +30,48 @@ const CartInfo = () => {
             <p className="text-paleBlue-100 text-md font-bold">$123</p>
           </div>
         </div>
+        <div className="bg-paleBlue-900 rounded-lg px-4 py-4 mb-2">
+          <div className="flex items-center justify-between">
+            <h1 className="text-paleBlue-200 font-semibold tracking-wide text-md">
+              Vegetable Lasagna
+            </h1>
+            <p className="text-paleBlue-200 font-semibold">x2</p>
+          </div>
+          <div className="flex items-center justify-between mt-2">
+            <div className="flex">
+              <MdDelete
+                className="text-paleBlue-200 cursor-pointer"
+                size={20}
+              />
+              <FaNotesMedical
+                className="text-paleBlue-200 cursor-pointer"
+                size={20}
+              />
+            </div>
+            <p className="text-paleBlue-100 text-md font-bold">$123</p>
+          </div>
+        </div>
+        <div className="bg-paleBlue-900 rounded-lg px-4 py-4 mb-2">
+          <div className="flex items-center justify-between">
+            <h1 className="text-paleBlue-200 font-semibold tracking-wide text-md">
+              Vegetable Lasagna
+            </h1>
+            <p className="text-paleBlue-200 font-semibold">x2</p>
+          </div>
+          <div className="flex items-center justify-between mt-2">
+            <div className="flex">
+              <MdDelete
+                className="text-paleBlue-200 cursor-pointer"
+                size={20}
+              />
+              <FaNotesMedical
+                className="text-paleBlue-200 cursor-pointer"
+                size={20}
+              />
+            </div>
+            <p className="text-paleBlue-100 text-md font-bold">$123</p>
+          </div>
+        </div>
       </div>
     </div>
   );
