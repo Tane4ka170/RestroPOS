@@ -6,8 +6,11 @@ import MenuContainer from "../components/menu/MenuContainer";
 import CustomerInfo from "../components/menu/CustomerInfo";
 import CartInfo from "../components/menu/CartInfo";
 import BillsInfo from "../components/menu/BillsInfo";
+import { useSelector } from "react-redux";
 
 const Menu = () => {
+  const customerData = useSelector((state) => state.customer);
+
   return (
     <section className="bg-paleBlue-400 h-[calc(100vh-5rem)] overflow-hidden flex gap-3">
       {/* Left div */}
@@ -24,9 +27,11 @@ const Menu = () => {
               <IoIosRestaurant className="text-paleBlue-100 text-4xl" />
               <div className="flex flex-col items-start">
                 <h1 className="text-md text-paleBlue-100 font-semibold">
-                  Customer Name
+                  {customerData.customerName}
                 </h1>
-                <p className="text-xs text-paleBlue-300">Table No:2</p>
+                <p className="text-xs text-paleBlue-300">
+                  {customerData.tableNo}
+                </p>
               </div>
             </div>
           </div>
