@@ -5,14 +5,17 @@ import { MdOutlineTableBar } from "react-icons/md";
 import { BiDish } from "react-icons/bi";
 import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
+import { useDispatch } from "react-redux";
+import { setCustomer } from "../../redux/slices/customerSlice";
 
 const BottomNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [guestCount, setGuestCount] = useState(0);
   const [name, setName] = useState();
-  const [phone, setPhone]
+  const [phone, setPhone] = useState();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -27,6 +30,11 @@ const BottomNav = () => {
   };
 
   const isActive = (path) => location.pathname === path;
+
+  const handleCreateOrder = () => {
+    dispatch(setCustomer({ name, phone, guests: guestCount }));
+    navigate("/tables");
+  };
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-paleBlue-800 p-2 flex justify-around">
@@ -84,6 +92,8 @@ const BottomNav = () => {
               id=""
               placeholder="Enter customer name"
               className="bg-transparent flex-1 text-paleBlue-100 focus:outline-none"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
         </div>
@@ -98,6 +108,8 @@ const BottomNav = () => {
               id=""
               placeholder="+11 1 11 11 11 11"
               className="bg-transparent flex-1 text-paleBlue-100 focus:outline-none"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
         </div>
@@ -118,7 +130,7 @@ const BottomNav = () => {
         </div>
         <button
           className="w-full bg-aquaTeal-800 text-paleBlue-100 rounded-lg py-3 mt-8 hover:bg-aquaTeal-300"
-          onClick={() => navigate("/tables")}
+          onClick={handleCreateOrder}
         >
           Create Order
         </button>
