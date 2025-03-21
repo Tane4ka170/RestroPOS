@@ -14,8 +14,8 @@ const BottomNav = () => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [guestCount, setGuestCount] = useState(0);
-  const [name, setName] = useState();
-  const [phone, setPhone] = useState();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
