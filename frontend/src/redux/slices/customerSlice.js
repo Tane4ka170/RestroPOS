@@ -14,9 +14,8 @@ const customerSlice = createSlice({
   reducers: {
     setCustomer: (state, action) => {
       const { name, phone, guests } = action.payload;
-      (state.orderId = `${Date.now()}-${Math.random()
-        .toString(36)
-        .substr(2, 5)}`)((state.customerName = name)),
+      (state.orderId = `${Date.now()}`),
+        (state.customerName = name),
         (state.customerPhone = phone),
         (state.guests = guests);
     },
