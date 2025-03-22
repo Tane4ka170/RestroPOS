@@ -12,7 +12,7 @@ const CustomerInfo = () => {
           {customerData.customerName}
         </h1>
         <p className="text-xs text-paleBlue-200 font-medium mt-1">
-          #101/Dine In
+          {customerData.orderId}/Dine In
         </p>
         <p className="text-xs text-paleBlue-200 font-medium mt-2">
           March 18, 2025 20:11
