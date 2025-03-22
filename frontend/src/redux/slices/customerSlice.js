@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  orderId: "",
   customerName: "",
   customerPhone: "",
   guests: 0,
@@ -13,7 +14,9 @@ const customerSlice = createSlice({
   reducers: {
     setCustomer: (state, action) => {
       const { name, phone, guests } = action.payload;
-      (state.customerName = name),
+      (state.orderId = `${Date.now()}-${Math.random()
+        .toString(36)
+        .substr(2, 5)}`)((state.customerName = name)),
         (state.customerPhone = phone),
         (state.guests = guests);
     },
