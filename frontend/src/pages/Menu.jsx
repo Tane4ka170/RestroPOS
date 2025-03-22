@@ -27,10 +27,10 @@ const Menu = () => {
               <IoIosRestaurant className="text-paleBlue-100 text-4xl" />
               <div className="flex flex-col items-start">
                 <h1 className="text-md text-paleBlue-100 font-semibold">
-                  {customerData.customerName}
+                  {customerData.customerName || "Customer Name"}
                 </h1>
                 <p className="text-xs text-paleBlue-300">
-                  {customerData.tableNo}
+                  {customerData.tableNo || "N/A"}
                 </p>
               </div>
             </div>
