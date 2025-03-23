@@ -21,9 +21,11 @@ const CartInfo = () => {
               <div className="bg-paleBlue-900 rounded-lg px-4 py-4 mb-2">
                 <div className="flex items-center justify-between">
                   <h1 className="text-paleBlue-200 font-semibold tracking-wide text-md">
-                    Vegetable Lasagna
+                    {item.name}
                   </h1>
-                  <p className="text-paleBlue-200 font-semibold">x2</p>
+                  <p className="text-paleBlue-200 font-semibold">
+                    x{item.quantity}
+                  </p>
                 </div>
                 <div className="flex items-center justify-between mt-2">
                   <div className="flex">
@@ -36,7 +38,9 @@ const CartInfo = () => {
                       size={20}
                     />
                   </div>
-                  <p className="text-paleBlue-100 text-md font-bold">$123</p>
+                  <p className="text-paleBlue-100 text-md font-bold">
+                    ${item.price}
+                  </p>
                 </div>
               </div>
             );
