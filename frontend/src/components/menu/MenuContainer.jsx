@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { GrRadialSelected } from "react-icons/gr";
 import { menus } from "../../constants";
 import { FaShoppingCart } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addItems } from "../../redux/slices/cartSlice";
 
 const MenuContainer = () => {
   const [selected, setSelected] = useState(menus[0]);
-  const [itemCount, setItemCount] = useState(0);
+  const [itemCount, setItemCount] = useState({});
   const [itemId, setItemId] = useState();
+  const dispatch = useDispatch();
 
   const increment = (id) => {
     setItemId(id);
@@ -24,11 +27,15 @@ const MenuContainer = () => {
 
     const { name, price } = item;
     const newObj = {
-      id: new Date(),
+      id: Date.now().toString(),
       name,
       pricePerQuantity: price,
       quantity: itemCount,
+      price: price * itemCount,
     };
+
+    dispatch(addItems(newObj));
+    setItemCount(0);
   };
   return (
     <>
