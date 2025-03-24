@@ -1,10 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { FaNotesMedical } from "react-icons/fa6";
+import { removeItem } from "../../redux/slices/cartSlice";
 
 const CartInfo = () => {
   const cartData = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const handleRemove = (itemId) => {
+    dispatch(removeItem(itemId));
+  };
   return (
     <div className="px-4 py-2">
       <h1 className="text-lg text-royalBlue-100 font-semibold tracking-wide">
@@ -32,6 +38,7 @@ const CartInfo = () => {
                     <MdDelete
                       className="text-paleBlue-200 cursor-pointer"
                       size={20}
+                      onClick={() => handleRemove(item.id)}
                     />
                     <FaNotesMedical
                       className="text-paleBlue-200 cursor-pointer"
