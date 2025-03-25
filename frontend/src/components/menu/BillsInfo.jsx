@@ -1,6 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { getTotalPrice } from "../../redux/slices/cartSlice";
 
 const BillsInfo = () => {
+  const total = useSelector(getTotalPrice);
+  const taxRate = 5.25;
+  const tax = (total * taxRate) / 1000;
+  const totalPriceWithTax = total + tax;
   return (
     <>
       <div className="flex items-center justify-between px-5 mt-2">
