@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { FaNotesMedical } from "react-icons/fa6";
@@ -6,7 +6,17 @@ import { removeItem } from "../../redux/slices/cartSlice";
 
 const CartInfo = () => {
   const cartData = useSelector((state) => state.cart);
+  const scrollRef = useRef();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [cartData]);
 
   const handleRemove = (itemId) => {
     dispatch(removeItem(itemId));
@@ -16,7 +26,10 @@ const CartInfo = () => {
       <h1 className="text-lg text-royalBlue-100 font-semibold tracking-wide">
         Order Details
       </h1>
-      <div className="mt-4 overflow-y-scroll scrollbar-hide h-[380px]">
+      <div
+        className="mt-4 overflow-y-scroll scrollbar-hide h-[380px]"
+        ref={scrollRef}
+      >
         {cartData.length === 0 ? (
           <p className="text-paleBlue-200 text-sm flex justify-center items-center h-[380px]">
             Your cart is currently empty. Add some items to get started!
