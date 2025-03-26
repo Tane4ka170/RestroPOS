@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { getTotalPrice } from "../../redux/slices/cartSlice";
 
 const BillsInfo = () => {
+  const cartData = useSelector((state) => state.cart);
   const total = useSelector(getTotalPrice);
   const taxRate = 5.25;
   const tax = (total * taxRate) / 1000;
@@ -10,12 +11,26 @@ const BillsInfo = () => {
   return (
     <>
       <div className="flex items-center justify-between px-5 mt-2">
-        <p className="text-xs text-paleBlue-200 font-medium mt-2">Items(4)</p>
-        <h1 className="text-paleBlue-100 text-md font-bold">$240</h1>
+        <p className="text-xs text-paleBlue-200 font-medium mt-2">
+          {cartData.length}
+        </p>
+        <h1 className="text-paleBlue-100 text-md font-bold">
+          {total.toFixed(2)}
+        </h1>
       </div>
       <div className="flex items-center justify-between px-5 mt-2">
         <p className="text-xs text-paleBlue-200 font-medium mt-2">Tax(5,25%)</p>
-        <h1 className="text-paleBlue-100 text-md font-bold">$24</h1>
+        <h1 className="text-paleBlue-100 text-md font-bold">
+          ${tax.toFixed(2)}
+        </h1>
+      </div>
+      <div className="flex items-center justify-between px-5 mt-2">
+        <p className="text-xs text-paleBlue-200 font-medium mt-2">
+          Total with tax (5,25%)
+        </p>
+        <h1 className="text-paleBlue-100 text-md font-bold">
+          ${totalPriceWithTax.toFixed(2)}
+        </h1>
       </div>
 
       <div className="flex items-center gap-3 px-5 mt-4">
