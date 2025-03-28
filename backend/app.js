@@ -1,8 +1,11 @@
 require("dotenv").config();
 const express = require("express");
+const connectDb = require("./config/database");
+const config = require("./config/config");
 const app = express();
 
-const PORT = process.env.PORT;
+const PORT = config.port;
+connectDb();
 
 app.get("/", (req, res) => {
   res.json({ message: "He said forever, but the summer died, and so did we" });
