@@ -10,11 +10,10 @@ const PORT = config.port;
 connectDb();
 
 app.get("/", (req, res) => {
-  const err = createHttpError(404, "An unexpected error occurred");
-  throw err;
-
   res.json({ message: "He said forever, but the summer died, and so did we" });
 });
+
+app.use("/api/user", require("./routes/userRoute"));
 
 app.use(globalErrorHandler);
 
