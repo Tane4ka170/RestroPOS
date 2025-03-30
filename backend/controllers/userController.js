@@ -1,4 +1,6 @@
 const createHttpError = require("http-errors");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 const register = async (req, res, next) => {
@@ -28,6 +30,35 @@ const register = async (req, res, next) => {
   }
 };
 
-const login = async (req, res, next) => {};
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      const error = createHttpError(400, "Please complete all fields");
+      next(error);
+    }
+
+    const isUserPresent = await User.findOne({ email });
+    if (!isUserPresent) {
+      const error = createHttpError(401, "Incorrect login details");
+      next(error);
+    }
+
+    const isMatch = await bcrypt.compare(password, isUserPresent.password);
+    if (!isMatch) {
+      const error = createHttpError(401, "Incorrect login details");
+      next(error);
+    }
+
+    const accessToken = jwt.sign(
+      { _id: isUserPresent._id },
+      accessTokenSecret,
+      { expiresIn: "1d" }
+    );
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = { register, login };
