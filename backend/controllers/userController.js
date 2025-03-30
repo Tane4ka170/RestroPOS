@@ -14,6 +14,15 @@ const register = async (req, res, next) => {
       const error = createHttpError(400, "The user already exists!");
       next(error);
     }
+    const user = { name, phone, email, password, role };
+    const newUser = User(user);
+    await newUser.save();
+
+    res.status(201).json({
+      success: true,
+      message: "A new account has been created",
+      data: newUser,
+    });
   } catch (error) {
     next(error);
   }
