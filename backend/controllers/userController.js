@@ -2,6 +2,7 @@ const createHttpError = require("http-errors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
+const config = require("../config/config");
 
 const register = async (req, res, next) => {
   try {
@@ -53,12 +54,29 @@ const login = async (req, res, next) => {
 
     const accessToken = jwt.sign(
       { _id: isUserPresent._id },
-      accessTokenSecret,
-      { expiresIn: "1d" }
+      config.accessTokenSecret,
+      {
+        expiresIn: "1d",
+      }
     );
+
+    res.cookie("accessToken", accessToken, {
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "User logged in successfully!",
+      data: isUserPresent,
+    });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { register, login };
+const getUserData = async (req, res, next) => {};
+
+module.exports = { register, login, getUserData };
