@@ -9,13 +9,13 @@ const register = async (req, res, next) => {
     const { name, phone, email, password, role } = req.body;
     if (!name || !phone || !email || !password || !role) {
       const error = createHttpError(400, "Every field must be filled out!");
-      next(error);
+      return next(error);
     }
 
     const isUserPresent = await User.findOne({ email });
     if (isUserPresent) {
       const error = createHttpError(400, "The user already exists!");
-      next(error);
+      return next(error);
     }
     const user = { name, phone, email, password, role };
     const newUser = User(user);
@@ -37,19 +37,19 @@ const login = async (req, res, next) => {
 
     if (!email || !password) {
       const error = createHttpError(400, "Please complete all fields");
-      next(error);
+      return next(error);
     }
 
     const isUserPresent = await User.findOne({ email });
     if (!isUserPresent) {
       const error = createHttpError(401, "Incorrect login details");
-      next(error);
+      return next(error);
     }
 
     const isMatch = await bcrypt.compare(password, isUserPresent.password);
     if (!isMatch) {
       const error = createHttpError(401, "Incorrect login details");
-      next(error);
+      return next(error);
     }
 
     const accessToken = jwt.sign(
@@ -77,6 +77,16 @@ const login = async (req, res, next) => {
   }
 };
 
-const getUserData = async (req, res, next) => {};
+const getUserData = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = { register, login, getUserData };
