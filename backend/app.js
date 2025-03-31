@@ -10,7 +10,7 @@ const PORT = config.port;
 connectDb();
 
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.json({ message: "He said forever, but the summer died, and so did we" });
