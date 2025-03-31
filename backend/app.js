@@ -3,13 +3,14 @@ const express = require("express");
 const connectDb = require("./config/database");
 const config = require("./config/config");
 const globalErrorHandler = require("./middlewares/globalErrorHandler");
-const createHttpError = require("http-errors");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 const PORT = config.port;
 connectDb();
 
 app.use(express.json());
+app.use(cookieParser);
 
 app.get("/", (req, res) => {
   res.json({ message: "He said forever, but the summer died, and so did we" });
