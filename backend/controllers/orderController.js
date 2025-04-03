@@ -41,6 +41,22 @@ const getOrders = async (req, res, next) => {
 const updateOrder = async (req, res, next) => {
   try {
     const { orderStatus } = req.body;
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { orderStatus },
+      { new: true }
+    );
+    if (!order) {
+      const error = createHttpError(404, "Unable to locate order!");
+      return next(error);
+    }
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: "Order successfully modified!",
+        data: order,
+      });
   } catch (error) {
     next(error);
   }
