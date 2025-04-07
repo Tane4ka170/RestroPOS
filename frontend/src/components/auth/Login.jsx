@@ -1,9 +1,35 @@
-import React from "react";
+import { useMutation } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { login } from "../../https";
 
 const Login = () => {
+  const [formData, setFromData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFromData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginMutation.mutate(formData);
+  };
+
+  const loginMutation = useMutation({
+    mutationFn: (reqData) => login(reqData),
+    onSuccess: (res) => {
+      const { data } = res;
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label className="block text-paleBlue-200 mb-2 mt-3 text-sm font-medium">
             Employee Email
@@ -15,6 +41,8 @@ const Login = () => {
               placeholder="Enter employee email"
               className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
               required
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -30,6 +58,8 @@ const Login = () => {
               placeholder="Enter password"
               className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
               required
+              value={formData.password}
+              onChange={handleChange}
             />
           </div>
         </div>
