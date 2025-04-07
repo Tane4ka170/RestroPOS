@@ -8,9 +8,22 @@ const Register = () => {
     password: "",
     role: "",
   });
+
+  const handleChange = (e) => {
+    setFromData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleRoleSelection = (selectedRole) => {
+    setFromData({ ...formData, role: selectedRole });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label className="block text-paleBlue-200 mb-2 text-sm font-medium">
             Employee Name
@@ -22,6 +35,8 @@ const Register = () => {
               placeholder="Enter employee name"
               className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
               required
+              value={formData.name}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -36,6 +51,8 @@ const Register = () => {
               placeholder="Enter employee email"
               className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
               required
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -50,6 +67,8 @@ const Register = () => {
               placeholder="Enter employee phone"
               className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
               required
+              value={formData.phone}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -64,6 +83,8 @@ const Register = () => {
               placeholder="Enter password"
               className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
               required
+              value={formData.password}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -76,9 +97,12 @@ const Register = () => {
             {["Waiter", "Cashier", "Admin"].map((role) => {
               return (
                 <button
-                  className="bg-paleBlue-600 px-4 py-3 w-full rounded-lg text-paleBlue-400"
+                  className={`bg-paleBlue-600 px-4 py-3 w-full rounded-lg text-paleBlue-400 ${
+                    formData.role === role ? "bg-royalBlue-600" : ""
+                  }`}
                   key={role}
                   type="button"
+                  onClick={() => handleRoleSelection(role)}
                 >
                   {role}
                 </button>
