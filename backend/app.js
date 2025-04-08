@@ -5,12 +5,14 @@ const config = require("./config/config");
 const globalErrorHandler = require("./middlewares/globalErrorHandler");
 const cookieParser = require("cookie-parser");
 const app = express();
+const cors = require("cors");
 
 const PORT = config.port;
 connectDb();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({ credentials: true, origin: ["http://localhost:5173"] }));
 
 app.get("/", (req, res) => {
   res.json({ message: "He said forever, but the summer died, and so did we" });
