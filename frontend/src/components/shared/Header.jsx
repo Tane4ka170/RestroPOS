@@ -57,10 +57,10 @@ const Header = () => {
         <div className="flex items-center gap-3 cursor-pointer">
           <FaRegUser className="text-paleBlue-100 text-4xl" />
           <div className="flex flex-col items-start">
-            <h1 className="text-md text-paleBlue-100 font-semibold">
+            <h1 className="text-md text-paleBlue-100 font-semibold tracking-wide">
               {userData.name || "Test"}
             </h1>
-            <p className="text-xs text-paleBlue-300">
+            <p className="text-xs text-paleBlue-300 font-medium">
               {userData.role || "N/A"}
             </p>
             <CiLogout
