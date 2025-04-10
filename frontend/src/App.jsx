@@ -1,6 +1,7 @@
-import { Route, Router, Routes, useLocation } from "react-router-dom";
+import { Route, Router, Routes, useLocation, Navigate } from "react-router-dom";
 import { Auth, Home, Menu, NotFound, Orders, Tables } from "./pages";
 import Header from "./components/shared/Header";
+import { useSelector } from "react-redux";
 
 function Layout() {
   const location = useLocation();
@@ -18,6 +19,13 @@ function Layout() {
       </Routes>
     </>
   );
+}
+
+function ProtectedRoutes({children}) {
+  const {isAuth}=useSelector(state=>state.user)
+  if (!isAuth) {
+    return <Navigate to='/auth'/>
+  }
 }
 
 function App() {
