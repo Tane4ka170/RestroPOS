@@ -21,10 +21,10 @@ function Layout() {
   );
 }
 
-function ProtectedRoutes({children}) {
-  const {isAuth}=useSelector(state=>state.user)
+function ProtectedRoutes({ children }) {
+  const { isAuth } = useSelector((state) => state.user);
   if (!isAuth) {
-    return <Navigate to='/auth'/>
+    return <Navigate to="/auth" />;
   }
 }
 
