@@ -11,7 +11,6 @@ import { removeUser } from "../../redux/slices/userSlice";
 const Header = () => {
   const userData = useSelector((state) => state.user);
 
-  console.log("User data: ", userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
