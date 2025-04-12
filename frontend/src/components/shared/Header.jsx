@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
 import { logout } from "../../https";
 import { removeUser } from "../../redux/slices/userSlice";
+import { MdDashboard } from "react-icons/md";
 
 const Header = () => {
   const userData = useSelector((state) => state.user);
@@ -50,6 +51,15 @@ const Header = () => {
 
       {/* Logged user details */}
       <div className="flex items-center gap-4">
+        {userData.role === "Admin" && (
+          <div
+            className="bg-paleBlue-600 rounded-[15px] p-3 cursor-pointer"
+            onClick={() => navigate("/dashboard")}
+          >
+            <MdDashboard className="text-paleBlue-100 text-2xl" />
+          </div>
+        )}
+
         <div className="bg-paleBlue-600 rounded-[15px] p-3 cursor-pointer">
           <CiBellOn className="text-paleBlue-100 text-2xl" />
         </div>
@@ -62,12 +72,12 @@ const Header = () => {
             <p className="text-xs text-paleBlue-300 font-medium">
               {userData.role || "N/A"}
             </p>
-            <CiLogout
-              onClick={handleLogout}
-              className="text-paleBlue-200 ml-2"
-              size={40}
-            />
           </div>
+          <CiLogout
+            onClick={handleLogout}
+            className="text-paleBlue-200 ml-2"
+            size={40}
+          />
         </div>
       </div>
     </header>
