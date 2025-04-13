@@ -69,8 +69,8 @@ const Metrics = () => {
         })}
       </div>
 
-      <div className="flex justify-between items-center mt-12">
-        <div className="">
+      <div className="flex flex-col justify-between mt-12">
+        <div>
           <h2 className="font-semibold text-paleBlue-800 text-xl">
             Item Details
           </h2>
@@ -80,41 +80,41 @@ const Metrics = () => {
             effectively manage your assortment and minimize waste.
           </p>
         </div>
-      </div>
 
-      <div lassName="mt-6 grid grid-cols-4 gap-4">
-        {itemsData.map((item, index) => {
-          return (
-            <div
-              key={index}
-              className="shadow-sm rounded-lg p-4"
-              style={{ backgroundColor: item.color }}
-            >
-              <div className="flex justify-between items-center">
-                <p className="font-medium text-xs text-paleBlue-600">
-                  {item.title}
-                </p>
-                <div className="flex items-center gap-1">
-                  <svg
-                    className="w-3 h-3 text-white"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    fill="none"
-                  >
-                    <path d="M5 15l7-7 7 7" />
-                  </svg>
+        <div className="mt-6 grid grid-cols-4 gap-4">
+          {itemsData.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="shadow-sm rounded-lg p-4"
+                style={{ backgroundColor: item.color }}
+              >
+                <div className="flex justify-between items-center">
                   <p className="font-medium text-xs text-paleBlue-600">
-                    {item.percentage}
+                    {item.title}
                   </p>
+                  <div className="flex items-center gap-1">
+                    <svg
+                      className="w-3 h-3 text-white"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    >
+                      <path d="M5 15l7-7 7 7" />
+                    </svg>
+                    <p className="font-medium text-xs text-paleBlue-600">
+                      {item.percentage}
+                    </p>
+                  </div>
                 </div>
+                <p className="mt-1 font-semibold text-2xl text-paleBlue-600">
+                  {item.value}
+                </p>
               </div>
-              <p className="mt-1 font-semibold text-2xl text-paleBlue-600">
-                {item.value}
-              </p>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
