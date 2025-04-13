@@ -3,6 +3,7 @@ import { BiDish } from "react-icons/bi";
 import { MdCategory, MdOutlineTableBar } from "react-icons/md";
 import Metrics from "../components/dashboard/Metrics";
 import RecentOrders from "../components/dashboard/RecentOrders";
+import Modal from "../components/dashboard/Modal";
 
 const buttons = [
   { label: "Add Table", icon: <MdOutlineTableBar />, action: "table" },
@@ -14,6 +15,12 @@ const tabs = ["Metrics", "Orders", "Payments"];
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("Metrics");
+  const [isTableModalOpen, setIsTableModalOpen] = useState(false);
+
+  const handleOpenModal = (action) => {
+    if (action === "table") setIsTableModalOpen(true);
+  };
+
   return (
     <div className="bg-paleBlue-400 h-[calc(100vh-5rem)]">
       <div className="container mx-auto flex items-center justify-between py-14 px-6 md:px-4">
@@ -23,6 +30,7 @@ const Dashboard = () => {
               <button
                 className="bg-paleBlue-100 hover:bg-paleBlue-300 px-8 py-3 rounded-lg text-paleBlue-400 font-semibold text-md flex items-center gap-2"
                 key={action}
+                onClick={() => handleOpenModal(action)}
               >
                 {label} {icon}
               </button>
@@ -49,6 +57,8 @@ const Dashboard = () => {
       </div>
       {activeTab === "Metrics" && <Metrics />}
       {activeTab === "Orders" && <RecentOrders />}
+
+      {isTableModalOpen && <Modal setIsTableModalOpen={setIsTableModalOpen} />}
     </div>
   );
 };
