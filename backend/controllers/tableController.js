@@ -3,7 +3,7 @@ const Table = require("../models/tableModel");
 
 const addTable = async (req, res, next) => {
   try {
-    const { tableNo } = req.body;
+    const { tableNo, seats } = req.body;
     if (!tableNo) {
       const error = createHttpError(400, "Kindly enter the table number!");
       return next(error);
@@ -14,7 +14,7 @@ const addTable = async (req, res, next) => {
       return next(error);
     }
 
-    const newTable = new Table({ tableNo });
+    const newTable = new Table({ tableNo, seats });
 
     await newTable.save();
 
