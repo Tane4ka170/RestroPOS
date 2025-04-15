@@ -25,26 +25,27 @@ const Modal = ({ setIsTableModalOpen }) => {
   const tableMutation = useMutation({
     mutationFn: (reqData) => addTable(reqData),
     onSuccess: (data) => {
-      setIsTableModalOpen(false), console.log(data);
+      setIsTableModalOpen(false);
+      enqueueSnackbar(data, { variant: "success" });
     },
     onError: (error) => {
       const { data } = error.response;
       console.log(error);
-      enqueueSnackbar(data.message, { variants: "error" });
+      enqueueSnackbar(data.message, { variant: "error" });
     },
   });
   return (
-    <div className="fixed inset-0 bg-paleBlue-900 bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 bg-paleBlue-900">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="bg-paleBlue-800 p-6 rounded-lg shadow-lg w-96"
+        className="p-6 rounded-lg shadow-lg bg-paleBlue-800 w-96"
       >
         {/* Modal Header */}
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-paleBlue-100 text-xl font-semibold">Add Table</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-paleBlue-100">Add Table</h2>
           <button
             className="text-paleBlue-700 hover:text-green-900"
             onClick={handleCloseModal}
@@ -54,16 +55,16 @@ const Modal = ({ setIsTableModalOpen }) => {
         </div>
 
         {/* Modal Body */}
-        <form className="space-y-4 mt-10" onSubmit={handleSubmit}>
+        <form className="mt-10 space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-paleBlue-200 mb-2 mt-3 text-sm font-medium">
+            <label className="block mt-3 mb-2 text-sm font-medium text-paleBlue-200">
               Table Number
             </label>
-            <div className="flex items-center rounded-lg p-5 px-4 bg-paleBlue-200">
+            <div className="flex items-center p-5 px-4 rounded-lg bg-paleBlue-200">
               <input
                 type="number"
                 name="tableNo"
-                className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
+                className="flex-1 bg-transparent text-paleBlue-800 focus:outline-none"
                 required
                 value={tableData.tableNo}
                 onChange={handleInputChange}
@@ -71,14 +72,14 @@ const Modal = ({ setIsTableModalOpen }) => {
             </div>
           </div>
           <div>
-            <label className="block text-paleBlue-200 mb-2 mt-3 text-sm font-medium">
+            <label className="block mt-3 mb-2 text-sm font-medium text-paleBlue-200">
               Number of Seats
             </label>
-            <div className="flex items-center rounded-lg p-5 px-4 bg-paleBlue-200">
+            <div className="flex items-center p-5 px-4 rounded-lg bg-paleBlue-200">
               <input
                 type="number"
                 name="seats"
-                className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
+                className="flex-1 bg-transparent text-paleBlue-800 focus:outline-none"
                 required
                 value={tableData.seats}
                 onChange={handleInputChange}
@@ -87,7 +88,7 @@ const Modal = ({ setIsTableModalOpen }) => {
           </div>
 
           <button
-            className="w-full mt-6 py-3 text-lg bg-aquaTeal-600 text-paleBlue-200 font-bold"
+            className="w-full py-3 mt-6 text-lg font-bold bg-aquaTeal-600 text-paleBlue-200"
             type="submit"
           >
             Add Table
