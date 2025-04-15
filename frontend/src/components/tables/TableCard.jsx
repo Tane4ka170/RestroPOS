@@ -3,6 +3,7 @@ import { getRandomBg } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateTable } from "../../redux/slices/customerSlice";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const TableCard = ({ key, name, status, initials }) => {
   const navigate = useNavigate();
@@ -20,7 +21,10 @@ const TableCard = ({ key, name, status, initials }) => {
       onClick={() => handleClick(name)}
     >
       <div className="flex items-center justify-between px-1">
-        <h1 className="text-paleBlue-100 text-xl font-semibold">{name}</h1>
+        <h1 className="text-xl font-semibold text-paleBlue-100">
+          Table <FaArrowAltCircleRight className="ml-2 text-paleBlue-700" />{" "}
+          {name}
+        </h1>
         <p
           className={`${
             status === "Booked"
