@@ -32,10 +32,10 @@ const Header = () => {
     logoutMutation.mutate();
   };
   return (
-    <header className="flex justify-between items-center py-4 px-8 bg-paleBlue-500">
+    <header className="flex items-center justify-between px-8 py-4 bg-paleBlue-500">
       {/* Logo */}
-      <div className="flex items-center gap-2">
-        <img src={logo} alt="Logo" className="h-8 w-8" />
+      <div className="flex items-center gap-2" onClick={() => navigate("/")}>
+        <img src={logo} alt="Logo" className="w-8 h-8" />
         <h1 className="text-lg font-semibold text-paleBlue-100">Restro</h1>
       </div>
 
@@ -45,7 +45,7 @@ const Header = () => {
         <input
           type="text"
           placeholder="Search"
-          className="bg-paleBlue-600 text-paleBlue-100 px-2 py-1 rounded-md outline-none"
+          className="px-2 py-1 rounded-md outline-none bg-paleBlue-600 text-paleBlue-100"
         />
       </div>
 
@@ -56,26 +56,26 @@ const Header = () => {
             className="bg-paleBlue-600 rounded-[15px] p-3 cursor-pointer"
             onClick={() => navigate("/dashboard")}
           >
-            <MdDashboard className="text-paleBlue-100 text-2xl" />
+            <MdDashboard className="text-2xl text-paleBlue-100" />
           </div>
         )}
 
         <div className="bg-paleBlue-600 rounded-[15px] p-3 cursor-pointer">
-          <CiBellOn className="text-paleBlue-100 text-2xl" />
+          <CiBellOn className="text-2xl text-paleBlue-100" />
         </div>
         <div className="flex items-center gap-3 cursor-pointer">
-          <FaRegUser className="text-paleBlue-100 text-4xl" />
+          <FaRegUser className="text-4xl text-paleBlue-100" />
           <div className="flex flex-col items-start">
-            <h1 className="text-md text-paleBlue-100 font-semibold tracking-wide">
+            <h1 className="font-semibold tracking-wide text-md text-paleBlue-100">
               {userData.name || "Test"}
             </h1>
-            <p className="text-xs text-paleBlue-300 font-medium">
+            <p className="text-xs font-medium text-paleBlue-300">
               {userData.role || "N/A"}
             </p>
           </div>
           <CiLogout
             onClick={handleLogout}
-            className="text-paleBlue-200 ml-2"
+            className="ml-2 text-paleBlue-200"
             size={40}
           />
         </div>
