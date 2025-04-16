@@ -57,7 +57,7 @@ const Tables = () => {
             <TableCard
               id={table._id}
               name={table.tableNo}
-              status={"TS"}
+              status={table?.currentOrder?.customerDetails.name}
               initials={table.initial}
             />
           ))}
