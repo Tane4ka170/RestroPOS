@@ -1,5 +1,5 @@
 import React from "react";
-import { getRandomBg } from "../../utils";
+import { getAvatarName, getBgColor } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateTable } from "../../redux/slices/customerSlice";
@@ -22,7 +22,8 @@ const TableCard = ({ key, name, status, initials }) => {
     >
       <div className="flex items-center justify-between px-1">
         <h1 className="text-xl font-semibold text-paleBlue-100">
-          Table <FaArrowAltCircleRight className="ml-2 text-paleBlue-700" />{" "}
+          Table{" "}
+          <FaArrowAltCircleRight className="ml-2 text-paleBlue-700 inline" />{" "}
           {name}
         </h1>
         <p
@@ -37,9 +38,10 @@ const TableCard = ({ key, name, status, initials }) => {
       </div>
       <div className="flex items-center justify-between mt-5 mb-9">
         <h1
-          className={`${getRandomBg()} text-paleBlue-100 rounded-full p-4 text-xl`}
+          className={` text-paleBlue-100 rounded-full p-4 text-xl`}
+          style={{ backgroundColor: initials ? getBgColor() : "#cfcef1" }}
         >
-          {initials}
+          {getAvatarName(initials) || "N/A"}
         </h1>
       </div>
     </div>
