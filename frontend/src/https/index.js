@@ -16,3 +16,6 @@ export const logout = () => api.post("/api/user/logout");
 
 export const addTable = (data) => api.post("/api/table", data);
 export const getTables = () => api.get("/api/table");
+
+export const createOrderStripe = (data) =>
+  api.post("/api/payment/create-order", data);
