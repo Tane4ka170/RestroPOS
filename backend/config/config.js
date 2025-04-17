@@ -5,6 +5,7 @@ const config = Object.freeze({
   database_url: process.env.MONGODB_URL || "mongodb://localhost:3741",
   node_env: process.env.NODE_ENV || "development",
   accessTokenSecret: process.env.JWT_SECRET,
+  stripeSecretKey: process.env.STRIPE_KEY_SECRET,
 });
 
 module.exports = config;
