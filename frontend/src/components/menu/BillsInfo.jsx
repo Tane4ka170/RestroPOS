@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getTotalPrice } from "../../redux/slices/cartSlice";
 import { enqueueSnackbar } from "notistack";
 import { useMutation } from "@tanstack/react-query";
+import { loadStripe } from "@stripe/stripe-js";
+import { createOrderStripe } from "../../https";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const BillsInfo = () => {
+  const dispatch = useDispatch();
   const cartData = useSelector((state) => state.cart);
   const customerData = useSelector((state) => state.customer);
   const total = useSelector(getTotalPrice);
+
   const [paymentMethod, setPaymentMethod] = useState();
   const [showInvoice, setShowInvoice] = useState(false);
   const [orderInfo, setOrderInfo] = useState();
-  const [clientSecret, setClientSecret] = useState("");
 
   const taxRate = 5.25;
   const tax = (total * taxRate) / 1000;
@@ -19,7 +24,7 @@ const BillsInfo = () => {
 
   const handlePlaceOrder = async () => {
     if (!paymentMethod) {
-      enqueueSnackbar("Please select a payment method!", {
+      enqueueSnackbar("Kindly choose a payment option!", {
         variant: "warning",
       });
       return;
@@ -31,16 +36,23 @@ const BillsInfo = () => {
           amount: totalPriceWithTax.toFixed(2),
         };
 
-        const { data } = await createPaymentIntent(reqData);
-        setClientSecret(data.clientSecret);
+        const { data } = await createOrderStripe(reqData);
+        const stripe = await stripePromise;
+
+        const result = await stripe.redirectToCheckout({
+          sessionId: data.sessionId,
+        });
+
+        if (result.error) {
+          enqueueSnackbar(result.error.message, { variant: "error" });
+        }
       } catch (error) {
         console.log(error);
-        enqueueSnackbar("Payment Failed!", {
+        enqueueSnackbar("Transaction Unsuccessful!", {
           variant: "error",
         });
       }
     } else {
-      // Place the order
       const orderData = {
         customerDetails: {
           name: customerData.customerName,
@@ -61,30 +73,6 @@ const BillsInfo = () => {
     }
   };
 
-  const handlePaymentSuccess = (paymentIntent) => {
-    const orderData = {
-      customerDetails: {
-        name: customerData.customerName,
-        phone: customerData.customerPhone,
-        guests: customerData.guests,
-      },
-      orderStatus: "In Progress",
-      bills: {
-        total: total,
-        tax: tax,
-        totalWithTax: totalPriceWithTax,
-      },
-      items: cartData,
-      table: customerData.table.tableId,
-      paymentMethod: paymentMethod,
-      paymentData: {
-        paymentIntentId: paymentIntent.id,
-      },
-    };
-
-    orderMutation.mutate(orderData);
-  };
-
   const orderMutation = useMutation({
     mutationFn: (reqData) => addOrder(reqData),
     onSuccess: (resData) => {
@@ -93,7 +81,6 @@ const BillsInfo = () => {
 
       setOrderInfo(data);
 
-      // Update Table
       const tableData = {
         status: "Booked",
         orderId: data._id,
@@ -107,6 +94,7 @@ const BillsInfo = () => {
       enqueueSnackbar("Order Placed!", {
         variant: "success",
       });
+
       setShowInvoice(true);
     },
     onError: (error) => {
@@ -116,8 +104,7 @@ const BillsInfo = () => {
 
   const tableUpdateMutation = useMutation({
     mutationFn: (reqData) => updateTable(reqData),
-    onSuccess: (resData) => {
-      console.log(resData);
+    onSuccess: () => {
       dispatch(removeCustomer());
       dispatch(removeAllItems());
     },
@@ -125,40 +112,45 @@ const BillsInfo = () => {
       console.log(error);
     },
   });
+
   return (
     <>
       <div className="flex items-center justify-between px-5 mt-2">
-        <p className="text-xs text-paleBlue-200 font-medium mt-2">
+        <p className="mt-2 text-xs font-medium text-paleBlue-200">
           {cartData.length}
         </p>
-        <h1 className="text-paleBlue-100 text-md font-bold">
+        <h1 className="font-bold text-paleBlue-100 text-md">
           {total.toFixed(2)}
         </h1>
       </div>
       <div className="flex items-center justify-between px-5 mt-2">
-        <p className="text-xs text-paleBlue-200 font-medium mt-2">Tax(5,25%)</p>
-        <h1 className="text-paleBlue-100 text-md font-bold">
+        <p className="mt-2 text-xs font-medium text-paleBlue-200">Tax(5,25%)</p>
+        <h1 className="font-bold text-paleBlue-100 text-md">
           ${tax.toFixed(2)}
         </h1>
       </div>
       <div className="flex items-center justify-between px-5 mt-2">
-        <p className="text-xs text-paleBlue-200 font-medium mt-2">
+        <p className="mt-2 text-xs font-medium text-paleBlue-200">
           Total with tax (5,25%)
         </p>
-        <h1 className="text-paleBlue-100 text-md font-bold">
+        <h1 className="font-bold text-paleBlue-100 text-md">
           ${totalPriceWithTax.toFixed(2)}
         </h1>
       </div>
 
       <div className="flex items-center gap-3 px-5 mt-4">
         <button
-          className="bg-paleBlue-600 px-4 py-3 w-full rounded-lg text-paleBlue-200 font-semibold"
+          className={`bg-paleBlue-600 px-4 py-3 w-full rounded-lg text-paleBlue-200 font-semibold ${
+            paymentMethod === "Cash" ? "bg-paleBlue-700" : ""
+          }`}
           onClick={() => setPaymentMethod("Cash")}
         >
           Cash
         </button>
         <button
-          className="bg-paleBlue-600 px-4 py-3 w-full rounded-lg text-paleBlue-200 font-semibold"
+          className={`bg-paleBlue-600 px-4 py-3 w-full rounded-lg text-paleBlue-200 font-semibold ${
+            paymentMethod === "Online" ? "bg-paleBlue-700" : ""
+          }`}
           onClick={() => setPaymentMethod("Online")}
         >
           Online
@@ -166,10 +158,13 @@ const BillsInfo = () => {
       </div>
 
       <div className="flex items-center gap-3 px-5 mt-4">
-        <button className="bg-green-600 px-4 py-3 w-full rounded-lg text-paleBlue-100 font-semibold text-lg">
+        <button className="w-full px-4 py-3 text-lg font-semibold bg-green-600 rounded-lg text-paleBlue-100">
           Print Receipt
         </button>
-        <button className="bg-royalBlue-300 px-4 py-3 w-full rounded-lg text-paleBlue-100 font-semibold text-lg">
+        <button
+          className="w-full px-4 py-3 text-lg font-semibold rounded-lg bg-royalBlue-300 text-paleBlue-100"
+          onClick={handlePlaceOrder}
+        >
           Place Order
         </button>
       </div>
