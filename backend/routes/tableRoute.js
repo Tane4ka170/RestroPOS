@@ -8,7 +8,7 @@ const {
 const router = express.Router();
 
 router.route("/").post(isVerifiedUser, addTable);
-router.route("/").post(isVerifiedUser, getTables);
+router.route("/").get(isVerifiedUser, getTables);
 router.route("/:id").put(isVerifiedUser, updateTable);
 
 module.exports = router;
