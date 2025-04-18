@@ -6,7 +6,10 @@ import { addTable } from "../../https";
 import { enqueueSnackbar } from "notistack";
 
 const Modal = ({ setIsTableModalOpen }) => {
-  const [tableData, setTableData] = useState({ tableNo: "", seats: "" });
+  const [tableData, setTableData] = useState({
+    tableNo: "",
+    seats: "",
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,22 +21,25 @@ const Modal = ({ setIsTableModalOpen }) => {
     console.log(tableData);
     tableMutation.mutate(tableData);
   };
+
   const handleCloseModal = () => {
     setIsTableModalOpen(false);
   };
 
   const tableMutation = useMutation({
     mutationFn: (reqData) => addTable(reqData),
-    onSuccess: (data) => {
+    onSuccess: (res) => {
       setIsTableModalOpen(false);
-      enqueueSnackbar(data, { variant: "success" });
+      const { data } = res;
+      enqueueSnackbar(data.message, { variant: "success" });
     },
     onError: (error) => {
       const { data } = error.response;
-      console.log(error);
       enqueueSnackbar(data.message, { variant: "error" });
+      console.log(error);
     },
   });
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 bg-paleBlue-900">
       <motion.div
