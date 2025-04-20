@@ -37,7 +37,10 @@ const CartInfo = () => {
         ) : (
           cartData.map((item) => {
             return (
-              <div className="bg-paleBlue-900 rounded-lg px-4 py-4 mb-2">
+              <div
+                className="bg-paleBlue-900 rounded-lg px-4 py-4 mb-2"
+                key={item.id}
+              >
                 <div className="flex items-center justify-between">
                   <h1 className="text-paleBlue-200 font-semibold tracking-wide text-md">
                     {item.name}
