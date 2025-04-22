@@ -5,25 +5,27 @@ import { useDispatch } from "react-redux";
 import { updateTable } from "../../redux/slices/customerSlice";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 
-const TableCard = ({ key, name, status, initials }) => {
+const TableCard = ({ id, name, status, initials }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleClick = (name) => {
     if (status === "Booked") return;
-    dispatch(updateTable({ tableNo: name }));
+
+    const table = { tableId: id, tableNo: name };
+    dispatch(updateTable({ table }));
     navigate("/menu");
   };
   return (
     <div
       className="w-[300px] bg-paleBlue-600 p-4 rounded-lg cursor-pointer hover:bg-paleBlue-700"
-      key={key}
+      key={id}
       onClick={() => handleClick(name)}
     >
       <div className="flex items-center justify-between px-1">
         <h1 className="text-xl font-semibold text-paleBlue-100">
           Table{" "}
-          <FaArrowAltCircleRight className="ml-2 text-paleBlue-700 inline" />{" "}
+          <FaArrowAltCircleRight className="inline ml-2 text-paleBlue-700" />{" "}
           {name}
         </h1>
         <p
