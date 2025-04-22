@@ -19,3 +19,5 @@ export const getTables = () => api.get("/api/table");
 
 export const createOrderStripe = (data) =>
   api.post("/api/payment/create-order", data);
+
+export const addOrder = (data) => api.post("/api/orders/", data);
