@@ -18,19 +18,19 @@ const Menu = () => {
         <div className="flex items-center justify-between px-10 py-4">
           <div className="flex items-center gap-4">
             <BackButton />
-            <h1 className="text-paleBlue-100 text-xl font-bold tracking-wider">
+            <h1 className="text-xl font-bold tracking-wider text-paleBlue-100">
               Menu
             </h1>
           </div>
           <div className="flex items-center justify-around gap-4">
             <div className="flex items-center gap-3 cursor-pointer">
-              <IoIosRestaurant className="text-paleBlue-100 text-4xl" />
+              <IoIosRestaurant className="text-4xl text-paleBlue-100" />
               <div className="flex flex-col items-start">
-                <h1 className="text-md text-paleBlue-100 font-semibold">
+                <h1 className="font-semibold text-md text-paleBlue-100">
                   {customerData.customerName || "Customer Name"}
                 </h1>
                 <p className="text-xs text-paleBlue-300">
-                  {customerData.tableNo || "N/A"}
+                  Table: {customerData.table.tableNo || "N/A"}
                 </p>
               </div>
             </div>
@@ -43,10 +43,10 @@ const Menu = () => {
       <div className="flex-[1] bg-paleBlue-700 mr-4 mt-3 h-[780px] rounded-lg pt-2 ">
         {/* Customer info */}
         <CustomerInfo />
-        <hr className="border-paleBlue-900 border-t-2" />
+        <hr className="border-t-2 border-paleBlue-900" />
         {/* Cart Items */}
         <CartInfo />
-        <hr className="border-paleBlue-900 border-t-2" />
+        <hr className="border-t-2 border-paleBlue-900" />
         {/* Bills */}
         <BillsInfo />
       </div>
