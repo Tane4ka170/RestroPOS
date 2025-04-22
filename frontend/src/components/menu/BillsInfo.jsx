@@ -4,7 +4,7 @@ import { getTotalPrice } from "../../redux/slices/cartSlice";
 import { enqueueSnackbar } from "notistack";
 import { useMutation } from "@tanstack/react-query";
 import { loadStripe } from "@stripe/stripe-js";
-import { createOrderStripe } from "../../https";
+import { addOrder, createOrderStripe } from "../../https";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
