@@ -4,7 +4,9 @@ import { getTotalPrice } from "../../redux/slices/cartSlice";
 import { enqueueSnackbar } from "notistack";
 import { useMutation } from "@tanstack/react-query";
 import { loadStripe } from "@stripe/stripe-js";
-import { addOrder, createOrderStripe } from "../../https";
+import { addOrder, createOrderStripe, updateTable } from "../../https";
+import { removeAllItems } from "../../redux/slices/cartSlice";
+import { removeCustomer } from "../../redux/slices/customerSlice";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -91,7 +93,7 @@ const BillsInfo = () => {
         tableUpdateMutation.mutate(tableData);
       }, 1500);
 
-      enqueueSnackbar("Order Placed!", {
+      enqueueSnackbar("Order Successfully Created!", {
         variant: "success",
       });
 
