@@ -16,9 +16,11 @@ export const logout = () => api.post("/api/user/logout");
 
 export const addTable = (data) => api.post("/api/table/", data);
 export const getTables = () => api.get("/api/table");
-export const updateTable = () => api.put("/api/table");
+export const updateTable = ({ tableId, ...tableData }) =>
+  api.put(`/api/table/${tableId}`, tableData);
 
 export const createOrderStripe = (data) =>
   api.post("/api/payment/create-order", data);
 
-export const addOrder = (data) => api.post("/api/orders/", data);
+export const addOrder = (data) => api.post("/api/order/", data);
+export const getOrders = () => api.get("/api/order");
