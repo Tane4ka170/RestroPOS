@@ -2,9 +2,24 @@ import React, { useState } from "react";
 import BottomNav from "../components/shared/BottomNav";
 import OrderCard from "../components/orders/OrderCard";
 import BackButton from "../components/shared/BackButton";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { getOrders } from "../https";
+import { enqueueSnackbar } from "notistack";
 
 const Orders = () => {
   const [status, setStatus] = useState("all");
+
+  const { data: resData, isError } = useQuery({
+    queryKey: ["orders"],
+    queryFn: async () => {
+      return await getOrders();
+    },
+    placeholderData: keepPreviousData,
+  });
+
+  if (isError) {
+    enqueueSnackbar("An error has occurred", { variant: "error" });
+  }
 
   return (
     <section className="bg-paleBlue-400 h-[calc(100vh-5rem)] overflow-hidden">
@@ -53,7 +68,13 @@ const Orders = () => {
 
       <div className="flex-1 overflow-y-scroll h-[650px] px-10 py-4 scrollbar-hide">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <OrderCard />
+          {resData?.data.data.length > 0 ? (
+            resData.data.data.map((order) => {
+              return <OrderCard key={order._id} order={order} />;
+            })
+          ) : (
+            <p className="col-span-3 text-paleBlue-100">No orders found</p>
+          )}
         </div>
       </div>
 
