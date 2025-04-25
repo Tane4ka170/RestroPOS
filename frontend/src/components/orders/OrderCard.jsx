@@ -1,6 +1,6 @@
 import React from "react";
-import { FaCheck, FaCircle } from "react-icons/fa";
-import { getAvatarName } from "../../utils";
+import { FaArrowAltCircleRight, FaCheck, FaCircle } from "react-icons/fa";
+import { formatDateAndTime, getAvatarName } from "../../utils";
 
 const OrderCard = ({ key, order }) => {
   return (
@@ -15,7 +15,14 @@ const OrderCard = ({ key, order }) => {
             <h1 className="text-paleBlue-100 text-lg font-semibold tracking-wide">
               {order.customerDetails.name}
             </h1>
-            <p className="text-paleBlue-200 text-sm">#101/Dine in</p>
+            <p className="text-paleBlue-200 text-sm">
+              #{Math.floor(new Date(order._id).getTime())}/Dine in
+            </p>
+            <p className="text-paleBlue-200 text-sm">
+              Table{" "}
+              <FaArrowAltCircleRight className="inline ml-2 text-paleBlue-700" />{" "}
+              {order.table.tableNo}
+            </p>
           </div>
 
           <div className="flex flex-col items-end gap-2">
@@ -47,13 +54,15 @@ const OrderCard = ({ key, order }) => {
       </div>
 
       <div className="flex justify-between items-center mt-4 text-paleBlue-200">
-        <p>{order.createdAt}</p>
-        <p>8 items</p>
+        <p>{formatDateAndTime(order.createdAt)}</p>
+        <p>{order.items.length} items</p>
       </div>
       <hr className="w-full text-paleBlue-100 mt-4 border-t-1 border-royalBlue-500" />
       <div className="flex items-center justify-between mt-4">
         <h1 className="text-paleBlue-100 text-lg font-semibold">Total</h1>
-        <p className="text-paleBlue-100 text-lg font-semibold">$ 250.00</p>
+        <p className="text-paleBlue-100 text-lg font-semibold">
+          ${order.bulls.totalWithTax.toFixed(2)}
+        </p>
       </div>
     </div>
   );
