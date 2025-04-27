@@ -24,3 +24,5 @@ export const createOrderStripe = (data) =>
 
 export const addOrder = (data) => api.post("/api/order/", data);
 export const getOrders = () => api.get("/api/order");
+export const updateOrderStatus = ({ orderId, ...orderStatus }) =>
+  api.put(`/api/order/${orderId}`, { orderStatus });
