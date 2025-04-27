@@ -1,7 +1,41 @@
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import React from "react";
+import { getOrders, updateOrderStatus } from "../../https";
+import { enqueueSnackbar } from "notistack";
+import { formatDateAndTime } from "../../utils";
 
 const RecentOrders = () => {
-  const handleStatusChange = () => {};
+  const queryClient = useQueryClient();
+  const handleStatusChange = ({ orderId, orderStatus }) => {
+    orderStatusWithMutation.mutate();
+  };
+
+  const { data: resData, isError } = useQuery({
+    queryKey: ["orders"],
+    queryFn: async () => {
+      return await getOrders();
+    },
+    placeholderData: keepPreviousData,
+  });
+
+  if (isError) {
+    enqueueSnackbar("An error has occurred", { variant: "error" });
+  }
+
+  const orderStatusWithMutation = useMutation({
+    mutationFn: ({ orderId, orderStatus }) =>
+      updateOrderStatus({ orderId, orderStatus }),
+    onSuccess: (data) =>
+      enqueueSnackbar("Order status has been updated successfully!", {
+        variant: "success",
+      }),
+  });
+
   return (
     <div className="container mx-auto bg-paleBlue-600 p-4 rounded-lg">
       <h2 className="text-paleBlue-500 text-xl font-semibold mb-4">
