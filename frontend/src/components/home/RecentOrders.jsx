@@ -40,7 +40,9 @@ const RecentOrders = () => {
         <div className="mt-4 px-6 overflow-y-scroll h-[300px] scrollbar-hide">
           {resData?.data.data.length > 0 ? (
             resData.data.data.map((order) => {
-              return <OrderList key={order._id} order={order} />;
+              return (
+                <OrderList key={order.id} order={order} orderKey={order.id} />
+              );
             })
           ) : (
             <p className="col-span-3 text-paleBlue-100">No orders found</p>
