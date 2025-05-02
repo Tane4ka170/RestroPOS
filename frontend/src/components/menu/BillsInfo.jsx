@@ -7,6 +7,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { addOrder, createOrderStripe, updateTable } from "../../https";
 import { removeAllItems } from "../../redux/slices/cartSlice";
 import { removeCustomer } from "../../redux/slices/customerSlice";
+import Invoice from "../invoice/Invoice";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -170,6 +171,10 @@ const BillsInfo = () => {
           Place Order
         </button>
       </div>
+
+      {showInvoice && (
+        <Invoice orderInfo={orderInfo} setShowInvoice={setShowInvoice} />
+      )}
     </>
   );
 };
