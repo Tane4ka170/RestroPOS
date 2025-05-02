@@ -12,8 +12,22 @@ import { formatDateAndTime } from "../../utils";
 const RecentOrders = () => {
   const queryClient = useQueryClient();
   const handleStatusChange = ({ orderId, orderStatus }) => {
-    orderStatusWithMutation.mutate();
+    orderStatusUpdateMutation.mutate({ orderId, orderStatus });
   };
+
+  const orderStatusUpdateMutation = useMutation({
+    mutationFn: ({ orderId, orderStatus }) =>
+      updateOrderStatus({ orderId, orderStatus }),
+    onSuccess: (data) => {
+      enqueueSnackbar(" Order status has been updated successfully!", {
+        variant: "success",
+      });
+      queryClient.invalidateQueries(["orders"]); // Refresh order list
+    },
+    onError: () => {
+      enqueueSnackbar("Failed to update order status!", { variant: "error" });
+    },
+  });
 
   const { data: resData, isError } = useQuery({
     queryKey: ["orders"],
@@ -26,15 +40,6 @@ const RecentOrders = () => {
   if (isError) {
     enqueueSnackbar("An error has occurred", { variant: "error" });
   }
-
-  const orderStatusWithMutation = useMutation({
-    mutationFn: ({ orderId, orderStatus }) =>
-      updateOrderStatus({ orderId, orderStatus }),
-    onSuccess: (data) =>
-      enqueueSnackbar("Order status has been updated successfully!", {
-        variant: "success",
-      }),
-  });
 
   return (
     <div className="container mx-auto bg-paleBlue-600 p-4 rounded-lg">
@@ -67,10 +72,10 @@ const RecentOrders = () => {
                 <td className="p-4">{order.customerDetails.name}</td>
                 <td className="p-4">
                   <select
-                    className={`bg-paleBlue-300 text-paleBlue-100 border border-royalBlue-500 p-2 rounded-lg focus:outline-none ${
+                    className={`bg-paleBlue-700 text-paleBlue-100 border border-royalBlue-500 p-2 rounded-lg focus:outline-none ${
                       order.orderStatus === "Ready"
-                        ? "text-green-900"
-                        : "text-aquaTeal-200"
+                        ? "text-green-400"
+                        : "text-aquaTeal-600"
                     }`}
                     value={order.orderStatus}
                     onChange={(e) =>
@@ -90,7 +95,7 @@ const RecentOrders = () => {
                 </td>
                 <td className="p-4">{formatDateAndTime(order.orderDate)}</td>
                 <td className="p-4">{order.items.length} Items</td>
-                <td className="p-4">Table - {order.table.tableNo}</td>
+                <td className="p-4">Table - {order.table?.tableNo ?? "N/A"}</td>
                 <td className="p-4">₹{order.bills.totalWithTax}</td>
                 <td className="p-4">{order.paymentMethod}</td>
               </tr>
