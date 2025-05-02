@@ -2,7 +2,7 @@ import React from "react";
 import { FaArrowAltCircleRight, FaCheck, FaCircle } from "react-icons/fa";
 import { getAvatarName } from "../../utils";
 
-const OrderList = ({ key, order }) => {
+const OrderList = ({ order, orderKey }) => {
   return (
     <div className="flex items-center gap-6">
       <button className="bg-aquaTeal-500 p-4 text-xl font-bold rounded-lg text-paleBlue-100">
@@ -14,16 +14,20 @@ const OrderList = ({ key, order }) => {
             {order.customerDetails.name}
           </h1>
           <p className="text-paleBlue-200 text-sm">
-            {order.items.length} items
+            {order.items?.length || 0} items
           </p>
         </div>
 
         <div>
-          <h1 className="text-aquaTeal-500 font-semibold border border-aquaTeal-500 p-1">
-            Table{" "}
-            <FaArrowAltCircleRight className="inline ml-2 text-paleBlue-700" />{" "}
-            {order.table.tableNo}
-          </h1>
+          {order.table ? (
+            <h1 className="text-aquaTeal-500 font-semibold border border-aquaTeal-500 p-1">
+              Table{" "}
+              <FaArrowAltCircleRight className="inline ml-2 text-paleBlue-700" />{" "}
+              {order.table.tableNo}
+            </h1>
+          ) : (
+            <h1 className="text-red-400 text-sm">No table assigned</h1>
+          )}
         </div>
 
         <div className="items-end flex flex-col gap-2">
