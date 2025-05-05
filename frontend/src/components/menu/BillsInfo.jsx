@@ -33,6 +33,24 @@ const BillsInfo = () => {
       return;
     }
 
+    // Загальна структура замовлення
+    const orderData = {
+      customerDetails: {
+        name: customerData.customerName,
+        phone: customerData.customerPhone,
+        guests: customerData.guests,
+      },
+      orderStatus: "In Progress",
+      paymentMethod: paymentMethod, // важливо!
+      items: cartData.items,
+      bills: {
+        total: total,
+        tax: tax,
+        totalWithTax: totalPriceWithTax,
+      },
+      orderDate: new Date(),
+    };
+
     if (paymentMethod === "Online") {
       try {
         const reqData = {
@@ -42,6 +60,19 @@ const BillsInfo = () => {
         const { data } = await createOrderStripe(reqData);
         const stripe = await stripePromise;
 
+        // Додаємо Stripe інформацію у orderData
+        const extendedOrderData = {
+          ...orderData,
+          paymentData: {
+            sessionId: data.sessionId,
+            paymentIntent: data.paymentIntent,
+          },
+        };
+
+        // Зберігаємо локально для інвойсу перед редіректом
+        setOrderInfo(extendedOrderData);
+        setShowInvoice(true);
+
         const result = await stripe.redirectToCheckout({
           sessionId: data.sessionId,
         });
@@ -50,29 +81,29 @@ const BillsInfo = () => {
           enqueueSnackbar(result.error.message, { variant: "error" });
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
         enqueueSnackbar("Transaction Unsuccessful!", {
           variant: "error",
         });
       }
     } else {
-      const orderData = {
-        customerDetails: {
-          name: customerData.customerName,
-          phone: customerData.customerPhone,
-          guests: customerData.guests,
-        },
-        orderStatus: "In Progress",
-        bills: {
-          total: total,
-          tax: tax,
-          totalWithTax: totalPriceWithTax,
-        },
-        items: cartData,
-        table: customerData.table.tableId,
-        paymentMethod: paymentMethod,
-      };
-      orderMutation.mutate(orderData);
+      try {
+        await addOrder(orderData); // Зберігаємо в базу (якщо потрібно)
+        setOrderInfo(orderData); // Передаємо у Invoice
+        setShowInvoice(true);
+
+        dispatch(removeAllItems());
+        dispatch(removeCustomer());
+
+        enqueueSnackbar("Order placed successfully!", {
+          variant: "success",
+        });
+      } catch (error) {
+        console.error(error);
+        enqueueSnackbar("Order placement failed!", {
+          variant: "error",
+        });
+      }
     }
   };
 
