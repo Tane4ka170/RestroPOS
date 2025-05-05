@@ -53,14 +53,27 @@ const Tables = () => {
 
       <div className="flex-1 px-10 py-4 pb-20 overflow-y-auto scrollbar-hide">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {resData?.data.data.map((table) => (
-            <TableCard
-              id={table._id}
-              name={table.tableNo}
-              status={table?.currentOrder?.customerDetails.name}
-              initials={table.initial}
-            />
-          ))}
+          {resData?.data.data.map((table) => {
+            const isBooked = !!table.currentOrder;
+            const customerName =
+              table.currentOrder?.customerDetails?.name || "Available";
+            const initials = customerName
+              .split(" ")
+              .map((n) => n[0])
+              .join("")
+              .toUpperCase();
+            console.log(resData?.data.data);
+
+            return (
+              <TableCard
+                key={table._id}
+                id={table._id}
+                name={table.tableNo}
+                status={isBooked ? "Booked" : "Available"}
+                initials={isBooked ? initials : ""}
+              />
+            );
+          })}
         </div>
       </div>
 
