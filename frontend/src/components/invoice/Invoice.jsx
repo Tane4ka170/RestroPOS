@@ -33,7 +33,7 @@ const Invoice = ({ orderInfo, setShowInvoice }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-paleBlue-900 bg-opacity-50 flex justify-center items-center">
+    <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 bg-paleBlue-900">
       <div className="bg-paleBlue-100 p-4 rounded-lg shadow-lg w-[400px]">
         {/* Receipt Content for Printing */}
         <div ref={invoiceRef} className="p-4">
@@ -43,7 +43,7 @@ const Invoice = ({ orderInfo, setShowInvoice }) => {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1.2, opacity: 1 }}
               transition={{ duration: 0.5, type: "spring", stiffness: 150 }}
-              className="w-12 h-12 border-8 border-aquaTeal-200 rounded-full flex items-center justify-center shadow-lg bg-aquaTeal-200"
+              className="flex items-center justify-center w-12 h-12 border-8 rounded-full shadow-lg border-aquaTeal-200 bg-aquaTeal-200"
             >
               <motion.span
                 initial={{ scale: 0 }}
@@ -56,15 +56,15 @@ const Invoice = ({ orderInfo, setShowInvoice }) => {
             </motion.div>
           </div>
 
-          <h2 className="text-xl font-bold text-center mb-2">
+          <h2 className="mb-2 text-xl font-bold text-center">
             Order Confirmation
           </h2>
-          <p className="text-paleBlue-200 text-center">
+          <p className="text-center text-paleBlue-200">
             We Appreciate Your Purchase!
           </p>
 
           {/* Order Details */}
-          <div className="mt-4 border-t pt-4 text-sm text-paleBlue-700">
+          <div className="pt-4 mt-4 text-sm border-t text-paleBlue-700">
             <p>
               <strong>Order ID:</strong>{" "}
               {Math.floor(new Date(orderInfo.orderDate).getTime())}
@@ -81,43 +81,47 @@ const Invoice = ({ orderInfo, setShowInvoice }) => {
           </div>
 
           {/* Items Summary */}
-          <div className="mt-4 border-t pt-4">
+          <div className="pt-4 mt-4 border-t">
             <h3 className="text-sm font-semibold">Items Ordered</h3>
             <ul className="text-sm text-paleBlue-700">
-              {orderInfo.items.map((item, index) => (
-                <li
-                  key={index}
-                  className="flex justify-between items-center text-xs"
-                >
-                  <span>
-                    {item.name} x{item.quantity}
-                  </span>
-                  <span>₹{item.price.toFixed(2)}</span>
-                </li>
-              ))}
+              {Array.isArray(orderInfo?.items) ? (
+                orderInfo.items.map((item, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center justify-between text-xs"
+                  >
+                    <span>
+                      {item.name} x{item.quantity}
+                    </span>
+                    <span>${item.price.toFixed(2)}</span>
+                  </li>
+                ))
+              ) : (
+                <li className="text-xs italic text-red-500">No items found</li>
+              )}
             </ul>
           </div>
 
           {/* Bills Summary */}
-          <div className="mt-4 border-t pt-4 text-sm">
+          <div className="pt-4 mt-4 text-sm border-t">
             <p>
-              <strong>Subtotal:</strong> ₹{orderInfo.bills.total.toFixed(2)}
+              <strong>Subtotal:</strong> ${orderInfo.bills.total.toFixed(2)}
             </p>
             <p>
-              <strong>Tax:</strong> ₹{orderInfo.bills.tax.toFixed(2)}
+              <strong>Tax:</strong> ${orderInfo.bills.tax.toFixed(2)}
             </p>
-            <p className="text-md font-semibold">
-              <strong>Grand Total:</strong> ₹
+            <p className="font-semibold text-md">
+              <strong>Grand Total:</strong> $
               {orderInfo.bills.totalWithTax.toFixed(2)}
             </p>
           </div>
 
           {/* Payment Details */}
-          <div className="mb-2 mt-2 text-xs">
+          <div className="mt-2 mb-2 text-xs">
             <p>
               <strong>Payment Method:</strong> {orderInfo.paymentMethod}
             </p>
-            {orderInfo.paymentMethod !== "Cash" && (
+            {orderInfo.paymentMethod === "Online" && (
               <>
                 <p>
                   <strong>Stripe Payment ID:</strong>{" "}
@@ -136,13 +140,13 @@ const Invoice = ({ orderInfo, setShowInvoice }) => {
         <div className="flex justify-between mt-4">
           <button
             onClick={handlePrint}
-            className="text-royalBlue-900 hover:underline text-xs px-4 py-2 rounded-lg"
+            className="px-4 py-2 text-xs rounded-lg text-royalBlue-900 hover:underline"
           >
             Print Receipt
           </button>
           <button
             onClick={() => setShowInvoice(false)}
-            className="text-aquaTeal-800 hover:underline text-xs px-4 py-2 rounded-lg"
+            className="px-4 py-2 text-xs rounded-lg text-aquaTeal-800 hover:underline"
           >
             Close
           </button>
