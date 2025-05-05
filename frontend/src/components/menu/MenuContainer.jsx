@@ -12,28 +12,25 @@ const MenuContainer = () => {
   const dispatch = useDispatch();
 
   const increment = (id) => {
-    setItemId(id);
-    if (itemCount >= 4) return;
-    setItemCount((prev) => prev + 1);
+    if (itemCount[id] >= 999) return;
+    setItemCount((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
   };
+
   const decrement = (id) => {
-    setItemCount((prev) => ({
-      ...prev,
-      [id]: (prev[id] || 0) > 0 ? prev[id] - 1 : 0,
-    }));
+    if ((itemCount[id] || 0) <= 0) return;
+    setItemCount((prev) => ({ ...prev, [id]: (prev[id] || 0) - 1 }));
   };
 
   const handleAddToCart = (item) => {
-    const count = itemCount[item.id] || 0;
-    if (count === 0) return;
+    if ((itemCount[item.id] || 0) === 0) return;
 
     const { name, price } = item;
     const newObj = {
       id: Date.now().toString(),
       name,
       pricePerQuantity: price,
-      quantity: count,
-      price: price * count,
+      quantity: itemCount[item.id] || 0,
+      price: price * (itemCount[item.id] || 0),
     };
 
     dispatch(addItems(newObj));
@@ -52,7 +49,7 @@ const MenuContainer = () => {
               onClick={() => {
                 setSelected(menu);
                 setItemId(0);
-                setItemCount(0);
+                setItemCount({});
               }}
             >
               <div className="flex items-center justify-between w-full">
@@ -103,7 +100,7 @@ const MenuContainer = () => {
                     &minus;
                   </button>
                   <span className="text-paleBlue-100">
-                    {item.id === itemId ? itemCount : "0"}
+                    {itemCount[item.id] || 0}
                   </span>
                   <button
                     className="text-2xl text-aquaTeal-500"
