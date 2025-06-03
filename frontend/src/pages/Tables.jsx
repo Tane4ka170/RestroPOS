@@ -21,6 +21,13 @@ const Tables = () => {
     enqueueSnackbar("An error has occurred", { variant: "error" });
   }
 
+  const tables = resData?.data.data || [];
+
+  const filteredTables =
+    status === "booked"
+      ? tables.filter((table) => !!table.currentOrder)
+      : tables;
+
   return (
     <section className="bg-paleBlue-400 h-[calc(100vh-5rem)] overflow-hidden flex flex-col">
       <div className="flex items-center justify-between px-10 py-4">
@@ -34,15 +41,15 @@ const Tables = () => {
         <div className="flex items-center justify-around gap-4">
           <button
             className={`text-paleBlue-200 text-lg rounded-lg px-5 py-2 font-semibold ${
-              status === "all" && "bg-paleBlue-700 rounded-lg px-5 py-2"
+              status === "all" ? "bg-paleBlue-700" : ""
             }`}
             onClick={() => setStatus("all")}
           >
             All
           </button>
           <button
-            className={`text-paleBlue-200 text-lg rounded-lg px-4 py-2 font-semibold ${
-              status === "booked" && "bg-paleBlue-700 rounded-lg px-5 py-2"
+            className={`text-paleBlue-200 text-lg rounded-lg px-5 py-2 font-semibold ${
+              status === "booked" ? "bg-paleBlue-700" : ""
             }`}
             onClick={() => setStatus("booked")}
           >
@@ -53,7 +60,7 @@ const Tables = () => {
 
       <div className="flex-1 px-10 py-4 pb-20 overflow-y-auto scrollbar-hide">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {resData?.data.data.map((table) => {
+          {filteredTables.map((table) => {
             const isBooked = !!table.currentOrder;
             const customerName =
               table.currentOrder?.customerDetails?.name || "Available";
@@ -62,7 +69,12 @@ const Tables = () => {
               .map((n) => n[0])
               .join("")
               .toUpperCase();
-            console.log(resData?.data.data);
+
+            console.log("Table status", {
+              id: table._id,
+              hasOrder: !!table.currentOrder,
+              customer: table.currentOrder?.customerDetails?.name,
+            });
 
             return (
               <TableCard
