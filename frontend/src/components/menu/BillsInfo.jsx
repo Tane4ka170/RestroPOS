@@ -25,93 +25,21 @@ const BillsInfo = () => {
   const tax = (total * taxRate) / 1000;
   const totalPriceWithTax = total + tax;
 
-  const handlePlaceOrder = async () => {
-    if (!paymentMethod) {
-      enqueueSnackbar("Kindly choose a payment option!", {
-        variant: "warning",
-      });
-      return;
-    }
-
-    // Загальна структура замовлення
-    const orderData = {
-      customerDetails: {
-        name: customerData.customerName,
-        phone: customerData.customerPhone,
-        guests: customerData.guests,
-      },
-      orderStatus: "In Progress",
-      paymentMethod: paymentMethod, // важливо!
-      items: cartData.items,
-      bills: {
-        total: total,
-        tax: tax,
-        totalWithTax: totalPriceWithTax,
-      },
-      orderDate: new Date(),
-    };
-
-    if (paymentMethod === "Online") {
-      try {
-        const reqData = {
-          amount: totalPriceWithTax.toFixed(2),
-        };
-
-        const { data } = await createOrderStripe(reqData);
-        const stripe = await stripePromise;
-
-        // Додаємо Stripe інформацію у orderData
-        const extendedOrderData = {
-          ...orderData,
-          paymentData: {
-            sessionId: data.sessionId,
-            paymentIntent: data.paymentIntent,
-          },
-        };
-
-        // Зберігаємо локально для інвойсу перед редіректом
-        setOrderInfo(extendedOrderData);
-        setShowInvoice(true);
-
-        const result = await stripe.redirectToCheckout({
-          sessionId: data.sessionId,
-        });
-
-        if (result.error) {
-          enqueueSnackbar(result.error.message, { variant: "error" });
-        }
-      } catch (error) {
-        console.error(error);
-        enqueueSnackbar("Transaction Unsuccessful!", {
-          variant: "error",
-        });
-      }
-    } else {
-      try {
-        await addOrder(orderData); // Зберігаємо в базу (якщо потрібно)
-        setOrderInfo(orderData); // Передаємо у Invoice
-        setShowInvoice(true);
-
-        dispatch(removeAllItems());
-        dispatch(removeCustomer());
-
-        enqueueSnackbar("Order placed successfully!", {
-          variant: "success",
-        });
-      } catch (error) {
-        console.error(error);
-        enqueueSnackbar("Order placement failed!", {
-          variant: "error",
-        });
-      }
-    }
-  };
+  const tableUpdateMutation = useMutation({
+    mutationFn: (reqData) => updateTable(reqData),
+    onSuccess: () => {
+      dispatch(removeCustomer());
+      dispatch(removeAllItems());
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const orderMutation = useMutation({
     mutationFn: (reqData) => addOrder(reqData),
     onSuccess: (resData) => {
       const { data } = resData.data;
-      console.log(data);
 
       setOrderInfo(data);
 
@@ -133,19 +61,75 @@ const BillsInfo = () => {
     },
     onError: (error) => {
       console.log(error);
+      enqueueSnackbar("Order placement failed!", {
+        variant: "error",
+      });
     },
   });
 
-  const tableUpdateMutation = useMutation({
-    mutationFn: (reqData) => updateTable(reqData),
-    onSuccess: () => {
-      dispatch(removeCustomer());
-      dispatch(removeAllItems());
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  });
+  const handlePlaceOrder = async () => {
+    if (!paymentMethod) {
+      enqueueSnackbar("Kindly choose a payment option!", {
+        variant: "warning",
+      });
+      return;
+    }
+
+    const orderData = {
+      customerDetails: {
+        name: customerData.customerName,
+        phone: customerData.customerPhone,
+        guests: customerData.guests,
+      },
+      orderStatus: "In Progress",
+      paymentMethod: paymentMethod,
+      items: cartData,
+      bills: {
+        total: total,
+        tax: tax,
+        totalWithTax: totalPriceWithTax,
+      },
+      orderDate: new Date(),
+      table: customerData.tableId, // Додано tableId
+    };
+
+    if (paymentMethod === "Online") {
+      try {
+        const reqData = {
+          amount: totalPriceWithTax.toFixed(2),
+        };
+
+        const { data } = await createOrderStripe(reqData);
+        const stripe = await stripePromise;
+
+        const extendedOrderData = {
+          ...orderData,
+          paymentData: {
+            sessionId: data.sessionId,
+            paymentIntent: data.paymentIntent,
+          },
+        };
+
+        setOrderInfo(extendedOrderData);
+        setShowInvoice(true);
+
+        const result = await stripe.redirectToCheckout({
+          sessionId: data.sessionId,
+        });
+
+        if (result.error) {
+          enqueueSnackbar(result.error.message, { variant: "error" });
+        }
+      } catch (error) {
+        console.error(error);
+        enqueueSnackbar("Transaction Unsuccessful!", {
+          variant: "error",
+        });
+      }
+    } else {
+      orderMutation.mutate(orderData);
+    }
+  };
 
   return (
     <>
