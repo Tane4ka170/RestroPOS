@@ -1,5 +1,6 @@
 const createHttpError = require("http-errors");
 const Table = require("../models/tableModel");
+const mongoose = require("mongoose");
 
 const addTable = async (req, res, next) => {
   try {
@@ -57,13 +58,14 @@ const updateTable = async (req, res, next) => {
 
     if (!table) {
       const error = createHttpError(404, "The table does not exist!");
-      return error;
+      return next(error);
     }
 
     res
       .status(200)
       .json({ success: true, message: "Table has been updated!", data: table });
   } catch (error) {
+    console.error("Update Table Error:", error);
     next(error);
   }
 };
