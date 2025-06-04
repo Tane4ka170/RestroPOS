@@ -27,7 +27,6 @@ const Login = () => {
     mutationFn: (reqData) => login(reqData),
     onSuccess: (res) => {
       const { data } = res;
-      console.log(data);
       const { _id, name, email, phone, role } = data.data;
       dispatch(setUser({ _id, name, email, phone, role }));
       navigate("/");
@@ -41,15 +40,15 @@ const Login = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label className="block text-paleBlue-200 mb-2 mt-3 text-sm font-medium">
+          <label className="block mt-3 mb-2 text-sm font-medium text-paleBlue-200">
             Employee Email
           </label>
-          <div className="flex items-center rounded-lg p-5 px-4 bg-paleBlue-200">
+          <div className="flex items-center p-5 px-4 rounded-lg bg-paleBlue-200">
             <input
               type="text"
               name="email"
               placeholder="Enter employee email"
-              className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
+              className="flex-1 bg-transparent text-paleBlue-800 focus:outline-none"
               required
               value={formData.email}
               onChange={handleChange}
@@ -58,15 +57,15 @@ const Login = () => {
         </div>
 
         <div>
-          <label className="block text-paleBlue-200 mb-2 mt-3 text-sm font-medium">
+          <label className="block mt-3 mb-2 text-sm font-medium text-paleBlue-200">
             Password
           </label>
-          <div className="flex items-center rounded-lg p-5 px-4 bg-paleBlue-200">
+          <div className="flex items-center p-5 px-4 rounded-lg bg-paleBlue-200">
             <input
               type="password"
               name="password"
               placeholder="Enter password"
-              className="bg-transparent flex-1 text-paleBlue-800 focus:outline-none"
+              className="flex-1 bg-transparent text-paleBlue-800 focus:outline-none"
               required
               value={formData.password}
               onChange={handleChange}
@@ -75,7 +74,7 @@ const Login = () => {
         </div>
 
         <button
-          className="w-full mt-6 py-3 text-lg bg-aquaTeal-600 text-paleBlue-200 font-bold"
+          className="w-full py-3 mt-6 text-lg font-bold bg-aquaTeal-600 text-paleBlue-200"
           type="submit"
         >
           Sign in
