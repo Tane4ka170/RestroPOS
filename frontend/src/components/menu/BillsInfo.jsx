@@ -43,14 +43,15 @@ const BillsInfo = () => {
 
       setOrderInfo(data);
 
-      const tableData = {
+      const tableUpdateData = {
+        tableId: data.table,
         status: "Booked",
         orderId: data._id,
-        tableId: data.table,
+        currentOrder: data,
       };
-
+      console.log("Sending to updateTable:", tableUpdateData);
       setTimeout(() => {
-        tableUpdateMutation.mutate(tableData);
+        tableUpdateMutation.mutate(tableUpdateData);
       }, 1500);
 
       enqueueSnackbar("Order Successfully Created!", {
@@ -90,7 +91,7 @@ const BillsInfo = () => {
         totalWithTax: totalPriceWithTax,
       },
       orderDate: new Date(),
-      table: customerData.tableId, // Додано tableId
+      table: customerData.tableId,
     };
 
     if (paymentMethod === "Online") {
