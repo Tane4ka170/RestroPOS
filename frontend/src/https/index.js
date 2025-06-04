@@ -19,8 +19,6 @@ export const getTables = () => api.get("/api/table");
 export const updateTable = ({ tableId, ...tableData }) => {
   if (!tableId) {
     console.error("updateTable: tableId не визначено!", { tableId, tableData });
-    console.log("✅ tableId:", tableId);
-    console.log("✅ tableData:", tableData);
     return Promise.reject("tableId is required");
   }
   return api.put(`/api/table/${tableId}`, tableData);
