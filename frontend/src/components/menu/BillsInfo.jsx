@@ -44,12 +44,11 @@ const BillsInfo = () => {
       setOrderInfo(data);
 
       const tableUpdateData = {
-        tableId: data.table,
+        tableId: customerData.table?.tableId,
         status: "Booked",
         orderId: data._id,
         currentOrder: data,
       };
-      console.log("Sending to updateTable:", tableUpdateData);
       setTimeout(() => {
         tableUpdateMutation.mutate(tableUpdateData);
       }, 1500);
@@ -91,7 +90,7 @@ const BillsInfo = () => {
         totalWithTax: totalPriceWithTax,
       },
       orderDate: new Date(),
-      table: customerData.tableId,
+      table: customerData.table?.tableId,
     };
 
     if (paymentMethod === "Online") {
