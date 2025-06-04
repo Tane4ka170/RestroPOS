@@ -21,12 +21,12 @@ const Tables = () => {
     enqueueSnackbar("An error has occurred", { variant: "error" });
   }
 
-  const tables = resData?.data.data || [];
+  const tables = resData?.data?.data || [];
 
   const filteredTables =
-    status === "booked"
-      ? tables.filter((table) => !!table.currentOrder)
-      : tables;
+    status === "all"
+      ? tables
+      : tables.filter((table) => table.status === "Booked");
 
   return (
     <section className="bg-paleBlue-400 h-[calc(100vh-5rem)] overflow-hidden flex flex-col">
@@ -61,7 +61,7 @@ const Tables = () => {
       <div className="flex-1 px-10 py-4 pb-20 overflow-y-auto scrollbar-hide">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredTables.map((table) => {
-            const isBooked = !!table.currentOrder;
+            const isBooked = table.status === "Booked";
             const customerName =
               table.currentOrder?.customerDetails?.name || "Available";
             const initials = customerName
@@ -69,12 +69,6 @@ const Tables = () => {
               .map((n) => n[0])
               .join("")
               .toUpperCase();
-
-            console.log("Table status", {
-              id: table._id,
-              hasOrder: !!table.currentOrder,
-              customer: table.currentOrder?.customerDetails?.name,
-            });
 
             return (
               <TableCard
