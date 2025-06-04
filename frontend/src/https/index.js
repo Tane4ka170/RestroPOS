@@ -16,8 +16,15 @@ export const logout = () => api.post("/api/user/logout");
 
 export const addTable = (data) => api.post("/api/table/", data);
 export const getTables = () => api.get("/api/table");
-export const updateTable = ({ tableId, ...tableData }) =>
-  api.put(`/api/table/${tableId}`, tableData);
+export const updateTable = ({ tableId, ...tableData }) => {
+  if (!tableId) {
+    console.error("updateTable: tableId не визначено!", { tableId, tableData });
+    console.log("✅ tableId:", tableId);
+    console.log("✅ tableData:", tableData);
+    return Promise.reject("tableId is required");
+  }
+  return api.put(`/api/table/${tableId}`, tableData);
+};
 
 export const createOrderStripe = (data) =>
   api.post("/api/payment/create-order", data);
