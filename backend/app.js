@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(cors({ credentials: true, origin: ["http://localhost:5173"] }));
 
 app.get("/", (req, res) => {
-  res.json({ message: "He said forever, but the summer died, and so did we" });
+  res.json({ message: "Hey, it's me — back-end made you look!" });
 });
 
 app.use("/api/user", require("./routes/userRoute"));
