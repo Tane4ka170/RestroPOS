@@ -61,7 +61,7 @@ const OrderCard = ({ key, order }) => {
       <div className="flex items-center justify-between mt-4">
         <h1 className="text-lg font-semibold text-paleBlue-100">Total</h1>
         <p className="text-lg font-semibold text-paleBlue-100">
-          ${order.bulls?.totalWithTax?.toFixed(2) || "0.00"}
+          ${order.bills?.totalWithTax?.toFixed(2) || "0.00"}
         </p>
       </div>
     </div>
