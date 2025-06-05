@@ -4,7 +4,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import { getOrders, updateOrderStatus } from "../../https";
 import { enqueueSnackbar } from "notistack";
 import { formatDateAndTime } from "../../utils";
@@ -37,9 +37,11 @@ const RecentOrders = () => {
     placeholderData: keepPreviousData,
   });
 
-  if (isError) {
-    enqueueSnackbar("An error has occurred", { variant: "error" });
-  }
+  useEffect(() => {
+    if (isError) {
+      enqueueSnackbar("An error has occurred", { variant: "error" });
+    }
+  }, [isError]);
 
   return (
     <div className="container mx-auto bg-paleBlue-600 p-4 rounded-lg">
